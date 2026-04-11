@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -86,9 +88,19 @@
   }
 }
 
+ 
+
 :root {
+    --color-primary: #1A5EAB;
+  --color-secondary: #FE9D2B;
+  --color-accent-100: #FCFBF8;
+  --color-accent-300: #EEEEEE;
+  --color-accent-500: #707070;
+  --color-background: #F6F5F2;
   --background: oklch(100% 0 0deg);
   --foreground: oklch(14.5% 0 0deg);
+  --font: "Lexend", sans-serif;
+  --color-background: #F6F5F2;
   --card: oklch(96.5% 0.005 265deg);
   --card-foreground: oklch(14.5% 0 0deg);
   --popover: oklch(100% 0 0deg);
@@ -170,7 +182,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
+  --color-primary: var(--color-primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -211,8 +223,82 @@
   }
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    font-family: var(--font);
+    overflow-x: hidden;
+    background-color: var(--color-background);
+    max-width: 1300px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    line-height: 2.2rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    line-height: 2.4rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
+  strong {
+    font-size: 3.25rem;
+    letter-spacing: -1px;
+  }
+
+  @media screen and (min-width: 768px) {
+    p { font-size: 1.0625rem; }
+    h4 { font-size: 1.25rem; line-height: 2rem; }
+    h3 { font-size: 1.5rem; line-height: 2rem; }
+    h2 { font-size: 2.5rem; line-height: 3rem; }
+    h1 { font-size: 3.5rem; line-height: 4rem; }
+    strong { font-size: 4rem; line-height: 4.5rem; letter-spacing: -1px; }
+  }
+
+  @media screen and (min-width: 1024px) {
+    p { font-size: 1.125rem; }
+    h4 { font-size: 1.5rem; line-height: 2.25rem; }
+    h3 { font-size: 1.875rem; line-height: 2.4rem; }
+    h2 { font-size: 2.25rem; line-height: 2.8rem; }
+    h1 { font-size: 4rem; line-height: 3.25rem; }
+    strong { font-size: 4.5rem; line-height: 3.25rem; letter-spacing: -1.5px; }
+  }
+
+  @media screen and (min-width: 1440px) {
+    p { font-size: 1.25rem; }
+    h4 { font-size: 1.75rem; line-height: 2.5rem; }
+    h3 { font-size: 2rem; line-height: 2.75rem; }
+    h2 { font-size: 3.75rem; line-height: 4.25rem; }
+    h1 { font-size: 6.25rem; line-height: 6.75rem; }
+    strong { font-size: 6.5rem; line-height: 7rem; letter-spacing: -2px; }
   }
 }
+
+@keyframes fadeInCustom {
+  0% { opacity: 0; transform: translateY(-40px); }
+  100% { opacity: 1; transform: translateY(-10px); }
+}
+
+.fade-in-custom {
+  animation: fadeInCustom 2s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+
 
 html {
   opacity: 0;

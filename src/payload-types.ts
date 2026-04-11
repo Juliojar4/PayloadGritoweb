@@ -201,7 +201,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | HomeHero | ThreeCardsBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -783,6 +783,40 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeHero".
+ */
+export interface HomeHero {
+  title: string;
+  'hero-image': string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ThreeCardsBlock".
+ */
+export interface ThreeCardsBlock {
+  sectionTitle: string;
+  sectionTitleHighlight: string;
+  ctaLabel?: string | null;
+  ctaUrl?: string | null;
+  cards?:
+    | {
+        borderColor: 'primary' | 'secondary';
+        image: string | Media;
+        title: string;
+        titleHighlight?: string | null;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'threeCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1089,6 +1123,8 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        homeHero?: T | HomeHeroSelect<T>;
+        threeCards?: T | ThreeCardsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1185,6 +1221,38 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeHero_select".
+ */
+export interface HomeHeroSelect<T extends boolean = true> {
+  title?: T;
+  'hero-image'?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ThreeCardsBlock_select".
+ */
+export interface ThreeCardsBlockSelect<T extends boolean = true> {
+  sectionTitle?: T;
+  sectionTitleHighlight?: T;
+  ctaLabel?: T;
+  ctaUrl?: T;
+  cards?:
+    | T
+    | {
+        borderColor?: T;
+        image?: T;
+        title?: T;
+        titleHighlight?: T;
+        description?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

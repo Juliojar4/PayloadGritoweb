@@ -9,6 +9,20 @@ import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { HomeHero } from '../../blocks/HomeHero/config'
 import { ThreeCards } from '../../blocks/ThreeCards/config'
+import { HomeSectionHero } from '../../blocks/HomeSectionHero/config'
+import { HomeSectionLogoCloud } from '../../blocks/HomeSectionLogoCloud/config'
+import { HomeSectionServices } from '../../blocks/HomeSectionServices/config'
+import { HomeSectionAbout } from '../../blocks/HomeSectionAbout/config'
+import { HomeSectionProjects } from '../../blocks/HomeSectionProjects/config'
+import { HomeSectionProcess } from '../../blocks/HomeSectionProcess/config'
+import { HomeSectionStats } from '../../blocks/HomeSectionStats/config'
+import { HomeSectionTestimonials } from '../../blocks/HomeSectionTestimonials/config'
+import { HomeSectionBlog } from '../../blocks/HomeSectionBlog/config'
+import { HomeSectionCta } from '../../blocks/HomeSectionCta/config'
+import { HomeSectionContact } from '../../blocks/HomeSectionContact/config'
+import { ChecklistGrid } from '../../blocks/ChecklistGrid/config'
+import { FaqBlock } from '../../blocks/FaqBlock/config'
+import { PullQuote } from '../../blocks/PullQuote/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -74,7 +88,29 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, HomeHero, ThreeCards],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+                HomeHero,
+                ThreeCards,
+                HomeSectionHero,
+                HomeSectionLogoCloud,
+                HomeSectionServices,
+                HomeSectionAbout,
+                HomeSectionProjects,
+                HomeSectionProcess,
+                HomeSectionStats,
+                HomeSectionTestimonials,
+                HomeSectionBlog,
+                HomeSectionCta,
+                HomeSectionContact,
+                ChecklistGrid,
+                FaqBlock,
+                PullQuote,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

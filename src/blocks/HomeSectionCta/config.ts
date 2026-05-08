@@ -1,0 +1,116 @@
+import type { Block } from 'payload'
+
+export const HomeSectionCta: Block = {
+  slug: 'homeSectionCta',
+  interfaceName: 'HomeSectionCtaBlock',
+  labels: { singular: 'CTA Banner', plural: 'CTA Banners' },
+  imageURL: '/block-previews/cta.png',
+  imageAltText: 'CTA Banner',
+  fields: [
+    {
+      name: 'variant',
+      label: 'Variante de cor',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Azul', value: 'blue' },
+        { label: 'Laranja', value: 'orange' },
+      ],
+      defaultValue: 'orange',
+    },
+    {
+      name: 'eyebrow',
+      label: 'Eyebrow',
+      type: 'text',
+      defaultValue: 'Próximo passo',
+    },
+    {
+      name: 'titleMain',
+      label: 'Título — linha 1',
+      type: 'text',
+      required: true,
+      defaultValue: 'Tem um projeto',
+    },
+    {
+      name: 'titleSecondary',
+      label: 'Título — linha 2',
+      type: 'text',
+      required: true,
+      defaultValue: 'em mente?',
+    },
+    {
+      name: 'titleSecondaryColor',
+      label: 'Cor da linha 2',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Azul', value: 'blue' },
+        { label: 'Branco', value: 'white' },
+        { label: 'Laranja', value: 'orange' },
+      ],
+      defaultValue: 'blue',
+    },
+    {
+      name: 'description',
+      label: 'Descrição',
+      type: 'textarea',
+    },
+    {
+      name: 'cta1Label',
+      label: 'Botão 1 — texto',
+      type: 'text',
+      required: true,
+      defaultValue: 'Agendar uma call',
+    },
+    {
+      name: 'cta1Href',
+      label: 'Botão 1 — link',
+      type: 'text',
+      required: true,
+      defaultValue: '#',
+    },
+    {
+      name: 'cta1Variant',
+      label: 'Botão 1 — variante',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Primário (laranja)', value: 'primary' },
+        { label: 'Azul', value: 'blue' },
+        { label: 'Ghost', value: 'ghost' },
+        { label: 'Branco', value: 'white' },
+      ],
+      defaultValue: 'blue',
+    },
+    {
+      name: 'cta2Label',
+      label: 'Botão 2 — texto',
+      type: 'text',
+      defaultValue: 'Baixar portfólio (PDF)',
+    },
+    {
+      name: 'cta2Href',
+      label: 'Botão 2 — link',
+      type: 'text',
+      defaultValue: '#',
+    },
+    {
+      name: 'cta2Variant',
+      label: 'Botão 2 — variante',
+      type: 'select',
+      options: [
+        { label: 'Primário (laranja)', value: 'primary' },
+        { label: 'Azul', value: 'blue' },
+        { label: 'Ghost', value: 'ghost' },
+        { label: 'Branco', value: 'white' },
+      ],
+      defaultValue: 'white',
+    },
+    {
+      name: 'image',
+      label: 'Imagem lateral',
+      type: 'upload',
+      relationTo: 'media',
+    },
+  ],
+}

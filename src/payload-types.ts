@@ -112,10 +112,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    home: Home;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    home: HomeSelect<false> | HomeSelect<true>;
   };
   locale: null;
   widgets: {
@@ -201,7 +203,29 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | HomeHero | ThreeCardsBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | HomeHero
+    | ThreeCardsBlock
+    | HomeSectionHeroBlock
+    | HomeSectionLogoCloudBlock
+    | HomeSectionServicesBlock
+    | HomeSectionAboutBlock
+    | HomeSectionProjectsBlock
+    | HomeSectionProcessBlock
+    | HomeSectionStatsBlock
+    | HomeSectionTestimonialsBlock
+    | HomeSectionBlogBlock
+    | HomeSectionCtaBlock
+    | HomeSectionContactBlock
+    | ChecklistGridBlock
+    | FaqBlockBlock
+    | PullQuoteBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -817,6 +841,307 @@ export interface ThreeCardsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionHeroBlock".
+ */
+export interface HomeSectionHeroBlock {
+  titlePart1: string;
+  titleAccent1: string;
+  titlePart2: string;
+  titleAccent2: string;
+  description: string;
+  cta1Label: string;
+  cta1Href: string;
+  cta2Label?: string | null;
+  cta2Href?: string | null;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionLogoCloudBlock".
+ */
+export interface HomeSectionLogoCloudBlock {
+  eyebrow: string;
+  titleStart: string;
+  titleAccent: string;
+  titleEnd?: string | null;
+  description?: string | null;
+  partners: {
+    name: string;
+    glyph:
+      | 'circle'
+      | 'triangle'
+      | 'square'
+      | 'diamond'
+      | 'arc'
+      | 'plus'
+      | 'hexagon'
+      | 'rings'
+      | 'halfcircle'
+      | 'wave'
+      | 'chevron'
+      | 'bars';
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionLogoCloud';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionServicesBlock".
+ */
+export interface HomeSectionServicesBlock {
+  eyebrow: string;
+  titleStart: string;
+  titleAccent: string;
+  titleEnd?: string | null;
+  description?: string | null;
+  services: {
+    name: string;
+    variant: 'blue' | 'orange';
+    description: string;
+    iconType: 'globe' | 'cart' | 'landing' | 'screen' | 'brand' | 'code';
+    /**
+     * Itens com ✓ que aparecem abaixo da descrição.
+     */
+    bullets?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionServices';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionAboutBlock".
+ */
+export interface HomeSectionAboutBlock {
+  eyebrow: string;
+  titlePart1: string;
+  titleAccent1: string;
+  titlePart2?: string | null;
+  titleAccent2?: string | null;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+  features: {
+    title: string;
+    description: string;
+    id?: string | null;
+  }[];
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionAbout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionProjectsBlock".
+ */
+export interface HomeSectionProjectsBlock {
+  eyebrow: string;
+  titleStart: string;
+  titleAccent: string;
+  portfolioLabel?: string | null;
+  portfolioHref?: string | null;
+  projects: {
+    tag: string;
+    tagVariant: 'blue' | 'orange';
+    accent: 'blue' | 'orange';
+    client: string;
+    year: string;
+    title: string;
+    result?: string | null;
+    motifType: 'tagMark' | 'dashboard' | 'arrowCurve';
+    href?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionProjects';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionProcessBlock".
+ */
+export interface HomeSectionProcessBlock {
+  eyebrow: string;
+  titleStart: string;
+  titleAccent: string;
+  titleEnd?: string | null;
+  description?: string | null;
+  /**
+   * O número do passo que será destacado em laranja (0 = primeiro).
+   */
+  highlightIndex?: number | null;
+  steps: {
+    title: string;
+    description?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionProcess';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionStatsBlock".
+ */
+export interface HomeSectionStatsBlock {
+  showDecoration?: boolean | null;
+  stats: {
+    value: string;
+    label: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionStats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionTestimonialsBlock".
+ */
+export interface HomeSectionTestimonialsBlock {
+  eyebrow: string;
+  titleStart: string;
+  titleAccent: string;
+  description?: string | null;
+  ratingValue: string;
+  reviewCount: string;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    avatarVariant: 'blue' | 'orange';
+    surface: 'paper' | 'card';
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionTestimonials';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionBlogBlock".
+ */
+export interface HomeSectionBlogBlock {
+  eyebrow: string;
+  titleStart: string;
+  titleAccent: string;
+  titleEnd?: string | null;
+  blogLabel?: string | null;
+  blogHref?: string | null;
+  posts: {
+    tag: string;
+    tagVariant: 'blue' | 'orange';
+    date: string;
+    title: string;
+    excerpt?: string | null;
+    href?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionBlog';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionCtaBlock".
+ */
+export interface HomeSectionCtaBlock {
+  variant: 'blue' | 'orange';
+  eyebrow?: string | null;
+  titleMain: string;
+  titleSecondary: string;
+  titleSecondaryColor: 'blue' | 'white' | 'orange';
+  description?: string | null;
+  cta1Label: string;
+  cta1Href: string;
+  cta1Variant: 'primary' | 'blue' | 'ghost' | 'white';
+  cta2Label?: string | null;
+  cta2Href?: string | null;
+  cta2Variant?: ('primary' | 'blue' | 'ghost' | 'white') | null;
+  image?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionContactBlock".
+ */
+export interface HomeSectionContactBlock {
+  email: string;
+  emailHref: string;
+  phone: string;
+  phoneHref: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeSectionContact';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ChecklistGridBlock".
+ */
+export interface ChecklistGridBlock {
+  eyebrow?: string | null;
+  titleStart: string;
+  titleAccent?: string | null;
+  titleEnd?: string | null;
+  items: {
+    title: string;
+    description?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'checklistGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlockBlock".
+ */
+export interface FaqBlockBlock {
+  eyebrow?: string | null;
+  titleStart: string;
+  titleAccent?: string | null;
+  titleEnd?: string | null;
+  defaultOpenIndex?: number | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PullQuoteBlock".
+ */
+export interface PullQuoteBlock {
+  eyebrow?: string | null;
+  quote: string;
+  author?: string | null;
+  role?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pullQuote';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1125,6 +1450,20 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         homeHero?: T | HomeHeroSelect<T>;
         threeCards?: T | ThreeCardsBlockSelect<T>;
+        homeSectionHero?: T | HomeSectionHeroBlockSelect<T>;
+        homeSectionLogoCloud?: T | HomeSectionLogoCloudBlockSelect<T>;
+        homeSectionServices?: T | HomeSectionServicesBlockSelect<T>;
+        homeSectionAbout?: T | HomeSectionAboutBlockSelect<T>;
+        homeSectionProjects?: T | HomeSectionProjectsBlockSelect<T>;
+        homeSectionProcess?: T | HomeSectionProcessBlockSelect<T>;
+        homeSectionStats?: T | HomeSectionStatsBlockSelect<T>;
+        homeSectionTestimonials?: T | HomeSectionTestimonialsBlockSelect<T>;
+        homeSectionBlog?: T | HomeSectionBlogBlockSelect<T>;
+        homeSectionCta?: T | HomeSectionCtaBlockSelect<T>;
+        homeSectionContact?: T | HomeSectionContactBlockSelect<T>;
+        checklistGrid?: T | ChecklistGridBlockSelect<T>;
+        faqBlock?: T | FaqBlockBlockSelect<T>;
+        pullQuote?: T | PullQuoteBlockSelect<T>;
       };
   meta?:
     | T
@@ -1253,6 +1592,295 @@ export interface ThreeCardsBlockSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionHeroBlock_select".
+ */
+export interface HomeSectionHeroBlockSelect<T extends boolean = true> {
+  titlePart1?: T;
+  titleAccent1?: T;
+  titlePart2?: T;
+  titleAccent2?: T;
+  description?: T;
+  cta1Label?: T;
+  cta1Href?: T;
+  cta2Label?: T;
+  cta2Href?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionLogoCloudBlock_select".
+ */
+export interface HomeSectionLogoCloudBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
+  description?: T;
+  partners?:
+    | T
+    | {
+        name?: T;
+        glyph?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionServicesBlock_select".
+ */
+export interface HomeSectionServicesBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
+  description?: T;
+  services?:
+    | T
+    | {
+        name?: T;
+        variant?: T;
+        description?: T;
+        iconType?: T;
+        bullets?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionAboutBlock_select".
+ */
+export interface HomeSectionAboutBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titlePart1?: T;
+  titleAccent1?: T;
+  titlePart2?: T;
+  titleAccent2?: T;
+  description?: T;
+  ctaLabel?: T;
+  ctaHref?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionProjectsBlock_select".
+ */
+export interface HomeSectionProjectsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  portfolioLabel?: T;
+  portfolioHref?: T;
+  projects?:
+    | T
+    | {
+        tag?: T;
+        tagVariant?: T;
+        accent?: T;
+        client?: T;
+        year?: T;
+        title?: T;
+        result?: T;
+        motifType?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionProcessBlock_select".
+ */
+export interface HomeSectionProcessBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
+  description?: T;
+  highlightIndex?: T;
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionStatsBlock_select".
+ */
+export interface HomeSectionStatsBlockSelect<T extends boolean = true> {
+  showDecoration?: T;
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionTestimonialsBlock_select".
+ */
+export interface HomeSectionTestimonialsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  description?: T;
+  ratingValue?: T;
+  reviewCount?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        avatarVariant?: T;
+        surface?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionBlogBlock_select".
+ */
+export interface HomeSectionBlogBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
+  blogLabel?: T;
+  blogHref?: T;
+  posts?:
+    | T
+    | {
+        tag?: T;
+        tagVariant?: T;
+        date?: T;
+        title?: T;
+        excerpt?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionCtaBlock_select".
+ */
+export interface HomeSectionCtaBlockSelect<T extends boolean = true> {
+  variant?: T;
+  eyebrow?: T;
+  titleMain?: T;
+  titleSecondary?: T;
+  titleSecondaryColor?: T;
+  description?: T;
+  cta1Label?: T;
+  cta1Href?: T;
+  cta1Variant?: T;
+  cta2Label?: T;
+  cta2Href?: T;
+  cta2Variant?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeSectionContactBlock_select".
+ */
+export interface HomeSectionContactBlockSelect<T extends boolean = true> {
+  email?: T;
+  emailHref?: T;
+  phone?: T;
+  phoneHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ChecklistGridBlock_select".
+ */
+export interface ChecklistGridBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlockBlock_select".
+ */
+export interface FaqBlockBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
+  defaultOpenIndex?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PullQuoteBlock_select".
+ */
+export interface PullQuoteBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  quote?: T;
+  author?: T;
+  role?: T;
   id?: T;
   blockName?: T;
 }
@@ -1759,6 +2387,28 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: string;
+  layout: (
+    | HomeSectionHeroBlock
+    | HomeSectionLogoCloudBlock
+    | HomeSectionServicesBlock
+    | HomeSectionAboutBlock
+    | HomeSectionProjectsBlock
+    | HomeSectionProcessBlock
+    | HomeSectionStatsBlock
+    | HomeSectionTestimonialsBlock
+    | HomeSectionBlogBlock
+    | HomeSectionCtaBlock
+    | HomeSectionContactBlock
+  )[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1798,6 +2448,30 @@ export interface FooterSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        homeSectionHero?: T | HomeSectionHeroBlockSelect<T>;
+        homeSectionLogoCloud?: T | HomeSectionLogoCloudBlockSelect<T>;
+        homeSectionServices?: T | HomeSectionServicesBlockSelect<T>;
+        homeSectionAbout?: T | HomeSectionAboutBlockSelect<T>;
+        homeSectionProjects?: T | HomeSectionProjectsBlockSelect<T>;
+        homeSectionProcess?: T | HomeSectionProcessBlockSelect<T>;
+        homeSectionStats?: T | HomeSectionStatsBlockSelect<T>;
+        homeSectionTestimonials?: T | HomeSectionTestimonialsBlockSelect<T>;
+        homeSectionBlog?: T | HomeSectionBlogBlockSelect<T>;
+        homeSectionCta?: T | HomeSectionCtaBlockSelect<T>;
+        homeSectionContact?: T | HomeSectionContactBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -48,9 +48,8 @@ export const seed = async ({
     globals.map((global) =>
       payload.updateGlobal({
         slug: global,
-        data: {
-          navItems: [],
-        },
+        // @ts-expect-error clearing globals generically during seed
+        data: { navItems: [] },
         depth: 0,
         context: {
           disableRevalidate: true,

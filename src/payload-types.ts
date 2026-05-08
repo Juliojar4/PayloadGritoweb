@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    portfolios: Portfolio;
     media: Media;
     categories: Category;
     users: User;
@@ -91,6 +92,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    portfolios: PortfoliosSelect<false> | PortfoliosSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -225,6 +227,7 @@ export interface Page {
     | ChecklistGridBlock
     | FaqBlockBlock
     | PullQuoteBlock
+    | ProjectGridAsymmetricBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1142,6 +1145,54 @@ export interface PullQuoteBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectGridAsymmetricBlock".
+ */
+export interface ProjectGridAsymmetricBlock {
+  eyebrow?: string | null;
+  titleStart?: string | null;
+  titleAccent?: string | null;
+  portfolioLabel?: string | null;
+  portfolioHref?: string | null;
+  /**
+   * Máximo de projetos exibidos. Padrão: 5.
+   */
+  limit?: number | null;
+  /**
+   * Deixe vazio para mostrar os projetos mais recentes automaticamente.
+   */
+  selectedProjects?: (string | Portfolio)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'projectGridAsymmetric';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolios".
+ */
+export interface Portfolio {
+  id: string;
+  title: string;
+  client: string;
+  summary?: string | null;
+  image: string | Media;
+  categories?: (string | Category)[] | null;
+  tag?: string | null;
+  tagVariant?: ('blue' | 'orange') | null;
+  accent?: ('blue' | 'orange') | null;
+  year?: string | null;
+  result?: string | null;
+  publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1339,6 +1390,10 @@ export interface PayloadLockedDocument {
         value: string | Post;
       } | null)
     | ({
+        relationTo: 'portfolios';
+        value: string | Portfolio;
+      } | null)
+    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
@@ -1464,6 +1519,7 @@ export interface PagesSelect<T extends boolean = true> {
         checklistGrid?: T | ChecklistGridBlockSelect<T>;
         faqBlock?: T | FaqBlockBlockSelect<T>;
         pullQuote?: T | PullQuoteBlockSelect<T>;
+        projectGridAsymmetric?: T | ProjectGridAsymmetricBlockSelect<T>;
       };
   meta?:
     | T
@@ -1886,6 +1942,21 @@ export interface PullQuoteBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectGridAsymmetricBlock_select".
+ */
+export interface ProjectGridAsymmetricBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  portfolioLabel?: T;
+  portfolioHref?: T;
+  limit?: T;
+  selectedProjects?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1909,6 +1980,28 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolios_select".
+ */
+export interface PortfoliosSelect<T extends boolean = true> {
+  title?: T;
+  client?: T;
+  summary?: T;
+  image?: T;
+  categories?: T;
+  tag?: T;
+  tagVariant?: T;
+  accent?: T;
+  year?: T;
+  result?: T;
+  publishedAt?: T;
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
@@ -2503,6 +2596,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'portfolios';
+          value: string | Portfolio;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

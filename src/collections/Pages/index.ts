@@ -23,6 +23,7 @@ import { HomeSectionContact } from '../../blocks/HomeSectionContact/config'
 import { ChecklistGrid } from '../../blocks/ChecklistGrid/config'
 import { FaqBlock } from '../../blocks/FaqBlock/config'
 import { PullQuote } from '../../blocks/PullQuote/config'
+import { ProjectGridAsymmetric } from '../../blocks/ProjectGridAsymmetric/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -110,6 +111,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ChecklistGrid,
                 FaqBlock,
                 PullQuote,
+                ProjectGridAsymmetric,
               ],
               required: true,
               admin: {

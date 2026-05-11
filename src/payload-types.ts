@@ -69,9 +69,13 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    arquivo: Arquivo;
     portfolios: Portfolio;
     media: Media;
     categories: Category;
+    tags: Tag;
+    'portfolio-tags': PortfolioTag;
+    'arquivo-tags': ArquivoTag;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -92,9 +96,13 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    arquivo: ArquivoSelect<false> | ArquivoSelect<true>;
     portfolios: PortfoliosSelect<false> | PortfoliosSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
+    'portfolio-tags': PortfolioTagsSelect<false> | PortfolioTagsSelect<true>;
+    'arquivo-tags': ArquivoTagsSelect<false> | ArquivoTagsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -229,6 +237,8 @@ export interface Page {
     | PullQuoteBlock
     | ProjectGridAsymmetricBlock
     | ContactSectionBlock
+    | BlogListingBlock
+    | ArquivoListingBlock
   )[];
   meta?: {
     title?: string | null;
@@ -256,6 +266,10 @@ export interface Post {
   id: string;
   title: string;
   heroImage?: (string | null) | Media;
+  /**
+   * Texto curto exibido na listagem de posts. Máximo recomendado: 160 caracteres.
+   */
+  excerpt?: string | null;
   content: {
     root: {
       type: string;
@@ -272,7 +286,7 @@ export interface Post {
     [k: string]: unknown;
   };
   relatedPosts?: (string | Post)[] | null;
-  categories?: (string | Category)[] | null;
+  tags?: (string | Tag)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -281,6 +295,10 @@ export interface Post {
     image?: (string | null) | Media;
     description?: string | null;
   };
+  /**
+   * Imagem exibida nos cards de listagem de posts.
+   */
+  featuredImage?: (string | null) | Media;
   publishedAt?: string | null;
   authors?: (string | User)[] | null;
   populatedAuthors?:
@@ -419,9 +437,9 @@ export interface FolderInterface {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
+ * via the `definition` "tags".
  */
-export interface Category {
+export interface Tag {
   id: string;
   title: string;
   /**
@@ -429,15 +447,6 @@ export interface Category {
    */
   generateSlug?: boolean | null;
   slug: string;
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -608,6 +617,30 @@ export interface ArchiveBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  parent?: (string | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1177,7 +1210,7 @@ export interface Portfolio {
   summary?: string | null;
   image: string | Media;
   categories?: (string | Category)[] | null;
-  tag?: string | null;
+  tag?: (string | null) | PortfolioTag;
   tagVariant?: ('blue' | 'orange') | null;
   accent?: ('blue' | 'orange') | null;
   year?: string | null;
@@ -1191,6 +1224,21 @@ export interface Portfolio {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-tags".
+ */
+export interface PortfolioTag {
+  id: string;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1215,6 +1263,113 @@ export interface ContactSectionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogListingBlock".
+ */
+export interface BlogListingBlock {
+  /**
+   * Aparece em banner acima da listagem. Deixe vazio para ocultar.
+   */
+  featuredPost?: (string | null) | Post;
+  eyebrow?: string | null;
+  titleStart?: string | null;
+  titleAccent?: string | null;
+  titleEnd?: string | null;
+  postsPerPage?: number | null;
+  showSearch?: boolean | null;
+  showFilters?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'blogListing';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArquivoListingBlock".
+ */
+export interface ArquivoListingBlock {
+  eyebrow?: string | null;
+  titleStart?: string | null;
+  titleAccent?: string | null;
+  titleEnd?: string | null;
+  showYear?: boolean | null;
+  showSearch?: boolean | null;
+  showFilters?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'arquivoListing';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "arquivo".
+ */
+export interface Arquivo {
+  id: string;
+  title: string;
+  year?: string | null;
+  client?: string | null;
+  tag?: (string | null) | ArquivoTag;
+  result?: string | null;
+  heroImage?: (string | null) | Media;
+  /**
+   * Texto curto exibido na listagem. Máximo recomendado: 160 caracteres.
+   */
+  excerpt?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "arquivo-tags".
+ */
+export interface ArquivoTag {
+  id: string;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1415,6 +1570,10 @@ export interface PayloadLockedDocument {
         value: string | Post;
       } | null)
     | ({
+        relationTo: 'arquivo';
+        value: string | Arquivo;
+      } | null)
+    | ({
         relationTo: 'portfolios';
         value: string | Portfolio;
       } | null)
@@ -1425,6 +1584,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: string | Category;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: string | Tag;
+      } | null)
+    | ({
+        relationTo: 'portfolio-tags';
+        value: string | PortfolioTag;
+      } | null)
+    | ({
+        relationTo: 'arquivo-tags';
+        value: string | ArquivoTag;
       } | null)
     | ({
         relationTo: 'users';
@@ -1546,6 +1717,8 @@ export interface PagesSelect<T extends boolean = true> {
         pullQuote?: T | PullQuoteBlockSelect<T>;
         projectGridAsymmetric?: T | ProjectGridAsymmetricBlockSelect<T>;
         contactSection?: T | ContactSectionBlockSelect<T>;
+        blogListing?: T | BlogListingBlockSelect<T>;
+        arquivoListing?: T | ArquivoListingBlockSelect<T>;
       };
   meta?:
     | T
@@ -2006,14 +2179,81 @@ export interface ContactSectionBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogListingBlock_select".
+ */
+export interface BlogListingBlockSelect<T extends boolean = true> {
+  featuredPost?: T;
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
+  postsPerPage?: T;
+  showSearch?: T;
+  showFilters?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArquivoListingBlock_select".
+ */
+export interface ArquivoListingBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
+  showYear?: T;
+  showSearch?: T;
+  showFilters?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
+  excerpt?: T;
   content?: T;
   relatedPosts?: T;
-  categories?: T;
+  tags?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  featuredImage?: T;
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "arquivo_select".
+ */
+export interface ArquivoSelect<T extends boolean = true> {
+  title?: T;
+  year?: T;
+  client?: T;
+  tag?: T;
+  result?: T;
+  heroImage?: T;
+  excerpt?: T;
+  content?: T;
   meta?:
     | T
     | {
@@ -2168,6 +2408,39 @@ export interface CategoriesSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-tags_select".
+ */
+export interface PortfolioTagsSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "arquivo-tags_select".
+ */
+export interface ArquivoTagsSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2645,6 +2918,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'arquivo';
+          value: string | Arquivo;
         } | null)
       | ({
           relationTo: 'portfolios';

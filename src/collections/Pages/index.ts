@@ -25,6 +25,8 @@ import { FaqBlock } from '../../blocks/FaqBlock/config'
 import { PullQuote } from '../../blocks/PullQuote/config'
 import { ProjectGridAsymmetric } from '../../blocks/ProjectGridAsymmetric/config'
 import { ContactSection } from '../../blocks/ContactSection/config'
+import { BlogListing } from '../../blocks/BlogListing/config'
+import { ArquivoListing } from '../../blocks/ArquivoListing/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -114,6 +116,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 PullQuote,
                 ProjectGridAsymmetric,
                 ContactSection,
+                BlogListing,
+                ArquivoListing,
               ],
               required: true,
               admin: {

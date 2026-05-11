@@ -99,7 +99,10 @@ export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock
             const firstCategory = portfolio.categories?.[0]
             const categoryTag =
               typeof firstCategory === 'object' ? firstCategory.title : undefined
-            const tag = categoryTag ?? portfolio.tag ?? undefined
+            const portfolioTag = typeof portfolio.tag === 'object' && portfolio.tag !== null
+              ? portfolio.tag.title
+              : undefined
+            const tag = categoryTag ?? portfolioTag ?? undefined
 
             return (
               <div key={portfolio.id} className={spanClasses[span]}>

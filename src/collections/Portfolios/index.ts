@@ -27,6 +27,7 @@ export const Portfolios: CollectionConfig<'portfolios'> = {
     summary: true,
   },
   admin: {
+    group: 'Portfólio',
     defaultColumns: ['title', 'client', 'year', 'updatedAt'],
     useAsTitle: 'title',
   },
@@ -66,7 +67,8 @@ export const Portfolios: CollectionConfig<'portfolios'> = {
     {
       name: 'tag',
       label: 'Tag do card',
-      type: 'text',
+      type: 'relationship',
+      relationTo: 'portfolio-tags',
       admin: { position: 'sidebar' },
     },
     {

@@ -16,7 +16,7 @@ import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
+import { revalidateArquivo, revalidateArquivoDelete } from './hooks/revalidateArquivo'
 
 import {
   MetaDescriptionField,
@@ -27,53 +27,75 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from 'payload'
 
-export const Posts: CollectionConfig<'posts'> = {
-  slug: 'posts',
+export const Arquivo: CollectionConfig<'arquivo'> = {
+  slug: 'arquivo',
+  labels: { singular: 'Arquivo', plural: 'Arquivos' },
   access: {
     create: authenticated,
     delete: authenticated,
     read: authenticatedOrPublished,
     update: authenticated,
   },
-  // This config controls what's populated by default when a post is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'posts'>
   defaultPopulate: {
     title: true,
     slug: true,
-    excerpt: true,
-    tags: true,
-    featuredImage: true,
+    year: true,
+    client: true,
+    tag: true,
+    result: true,
     meta: {
       image: true,
       description: true,
     },
   },
   admin: {
-    group: 'Blog',
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    group: 'Arquivo',
+    defaultColumns: ['title', 'client', 'year', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) =>
-        generatePreviewPath({
-          slug: data?.slug,
-          collection: 'posts',
-          req,
-        }),
+        generatePreviewPath({ slug: data?.slug, collection: 'arquivo', req }),
     },
     preview: (data, { req }) =>
-      generatePreviewPath({
-        slug: data?.slug as string,
-        collection: 'posts',
-        req,
-      }),
+      generatePreviewPath({ slug: data?.slug as string, collection: 'arquivo', req }),
     useAsTitle: 'title',
   },
   fields: [
+    // "Projeto" — título principal
     {
       name: 'title',
+      label: 'Projeto',
       type: 'text',
       required: true,
     },
+
+    // Sidebar: Ano → Cliente → Tag → Resultado (nessa ordem)
+    {
+      name: 'year',
+      label: 'Ano',
+      type: 'text',
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'client',
+      label: 'Cliente',
+      type: 'text',
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'tag',
+      label: 'Tag',
+      type: 'relationship',
+      relationTo: 'arquivo-tags',
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'result',
+      label: 'Resultado',
+      type: 'text',
+      admin: { position: 'sidebar' },
+    },
+
+    // Conteúdo e SEO em tabs
     {
       type: 'tabs',
       tabs: [
@@ -89,7 +111,7 @@ export const Posts: CollectionConfig<'posts'> = {
               label: 'Resumo',
               type: 'textarea',
               admin: {
-                description: 'Texto curto exibido na listagem de posts. Máximo recomendado: 160 caracteres.',
+                description: 'Texto curto exibido na listagem. Máximo recomendado: 160 caracteres.',
               },
             },
             {
@@ -108,42 +130,9 @@ export const Posts: CollectionConfig<'posts'> = {
                 },
               }),
               label: false,
-              required: true,
             },
           ],
           label: 'Content',
-        },
-        {
-          fields: [
-            {
-              name: 'relatedPosts',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: 'posts',
-            },
-
-            {
-              name: 'tags',
-              label: 'Tags',
-              type: 'relationship',
-              relationTo: 'tags',
-              hasMany: true,
-              admin: {
-                position: 'sidebar',
-              },
-            },
-          ],
-          label: 'Meta',
         },
         {
           name: 'meta',
@@ -154,19 +143,11 @@ export const Posts: CollectionConfig<'posts'> = {
               descriptionPath: 'meta.description',
               imagePath: 'meta.image',
             }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'media',
-            }),
-
+            MetaTitleField({ hasGenerateFn: true }),
+            MetaImageField({ relationTo: 'media' }),
             MetaDescriptionField({}),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -174,31 +155,18 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
-    {
-      name: 'featuredImage',
-      label: 'Imagem de capa (listagem)',
-      type: 'upload',
-      relationTo: 'media',
-      admin: {
-        position: 'sidebar',
-        description: 'Imagem exibida nos cards de listagem de posts.',
-      },
-    },
+
     {
       name: 'publishedAt',
       type: 'date',
       admin: {
-        date: {
-          pickerAppearance: 'dayAndTime',
-        },
+        date: { pickerAppearance: 'dayAndTime' },
         position: 'sidebar',
       },
       hooks: {
         beforeChange: [
           ({ siblingData, value }) => {
-            if (siblingData._status === 'published' && !value) {
-              return new Date()
-            }
+            if (siblingData._status === 'published' && !value) return new Date()
             return value
           },
         ],
@@ -207,48 +175,30 @@ export const Posts: CollectionConfig<'posts'> = {
     {
       name: 'authors',
       type: 'relationship',
-      admin: {
-        position: 'sidebar',
-      },
+      admin: { position: 'sidebar' },
       hasMany: true,
       relationTo: 'users',
     },
-    // This field is only used to populate the user data via the `populateAuthors` hook
-    // This is because the `user` collection has access control locked to protect user privacy
-    // GraphQL will also not return mutated user data that differs from the underlying schema
     {
       name: 'populatedAuthors',
       type: 'array',
-      access: {
-        update: () => false,
-      },
-      admin: {
-        disabled: true,
-        readOnly: true,
-      },
+      access: { update: () => false },
+      admin: { disabled: true, readOnly: true },
       fields: [
-        {
-          name: 'id',
-          type: 'text',
-        },
-        {
-          name: 'name',
-          type: 'text',
-        },
+        { name: 'id', type: 'text' },
+        { name: 'name', type: 'text' },
       ],
     },
     slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePost],
+    afterChange: [revalidateArquivo],
     afterRead: [populateAuthors],
-    afterDelete: [revalidateDelete],
+    afterDelete: [revalidateArquivoDelete],
   },
   versions: {
     drafts: {
-      autosave: {
-        interval: 100, // We set this interval for optimal live preview
-      },
+      autosave: { interval: 100 },
       schedulePublish: true,
     },
     maxPerDoc: 50,

@@ -25,6 +25,8 @@ import { FaqBlockComponent } from '@/blocks/FaqBlock/Component'
 import { PullQuoteComponent } from '@/blocks/PullQuote/Component'
 import { ProjectGridAsymmetricComponent } from '@/blocks/ProjectGridAsymmetric/Component'
 import { ContactSectionComponent } from '@/blocks/ContactSection/Component'
+import { BlogListingComponent } from '@/blocks/BlogListing/Component'
+import { ArquivoListingComponent } from '@/blocks/ArquivoListing/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -50,6 +52,8 @@ const blockComponents = {
   pullQuote: PullQuoteComponent,
   projectGridAsymmetric: ProjectGridAsymmetricComponent,
   contactSection: ContactSectionComponent,
+  blogListing: BlogListingComponent,
+  arquivoListing: ArquivoListingComponent,
 }
 
 export const RenderBlocks: React.FC<{

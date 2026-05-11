@@ -4,7 +4,11 @@ import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 
+import { Arquivo } from './collections/Arquivo'
+import { ArquivoTags } from './collections/ArquivoTags'
 import { Categories } from './collections/Categories'
+import { PortfolioTags } from './collections/PortfolioTags'
+import { Tags } from './collections/Tags'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Portfolios } from './collections/Portfolios'
@@ -62,7 +66,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || '',
   }),
-  collections: [Pages, Posts, Portfolios, Media, Categories, Users],
+  collections: [Pages, Posts, Arquivo, Portfolios, Media, Categories, Tags, PortfolioTags, ArquivoTags, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Home],
   plugins,

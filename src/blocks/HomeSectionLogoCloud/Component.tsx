@@ -1,28 +1,20 @@
 import React from 'react'
 import type { HomeSectionLogoCloudBlock } from '@/payload-types'
 import { LogoCloud } from '@/home/sections'
-import { Orange } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { LogoMark } from '@/home/cards'
 import { Glyph } from '@/home/illustrations'
 
 export const HomeSectionLogoCloudComponent: React.FC<HomeSectionLogoCloudBlock> = ({
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   description,
   partners,
 }) => {
   return (
     <LogoCloud
       eyebrow={eyebrow}
-      title={
-        <>
-          {titleStart}
-          <Orange>{titleAccent}</Orange>
-          {titleEnd}
-        </>
-      }
+      title={parseTitle(title)}
       description={description ?? undefined}
       items={(partners ?? []).map((partner) => (
         <LogoMark

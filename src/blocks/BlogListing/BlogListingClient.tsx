@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react'
 import Image from 'next/image'
 import type { Media } from '@/payload-types'
+import { parseTitle } from '@/utilities/parseTitle'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -29,9 +30,7 @@ export type BlogListingClientProps = {
   filters: FilterOption[]
   featuredPost?: FeaturedPostItem | null
   eyebrow?: string | null
-  titleStart?: string | null
-  titleAccent?: string | null
-  titleEnd?: string | null
+  title?: string | null
   postsPerPage: number
   showSearch: boolean
   showFilters: boolean
@@ -196,9 +195,7 @@ export function BlogListingClient({
   filters,
   featuredPost,
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   postsPerPage,
   showSearch,
   showFilters,
@@ -247,7 +244,7 @@ export function BlogListingClient({
   }
 
   return (
-    <section className="px-6 md:px-12 pb-20">
+    <section className="px-6 md:px-12 py-24">
       <div className="max-w-7xl mx-auto">
         {/* Featured post banner */}
         {featuredPost && <FeaturedPostBanner post={featuredPost} />}
@@ -257,9 +254,7 @@ export function BlogListingClient({
           <header className="flex flex-col gap-3 max-w-3xl">
             {eyebrow && <p className="font-eyebrow m-0">{eyebrow}</p>}
             <h2 className="m-0 text-blue">
-              {titleStart}
-              {titleAccent && <span className="text-orange">{titleAccent}</span>}
-              {titleEnd}
+              {parseTitle(title)}
             </h2>
           </header>
 

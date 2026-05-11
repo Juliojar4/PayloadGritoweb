@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
+import { parseTitle } from '@/utilities/parseTitle'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -25,9 +26,7 @@ export type ArquivoListingClientProps = {
   items: ArquivoItem[]
   filters: FilterOption[]
   eyebrow?: string | null
-  titleStart?: string | null
-  titleAccent?: string | null
-  titleEnd?: string | null
+  title?: string | null
   showYear: boolean
   showSearch: boolean
   showFilters: boolean
@@ -124,9 +123,7 @@ export function ArquivoListingClient({
   items,
   filters,
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   showYear,
   showSearch,
   showFilters,
@@ -148,7 +145,7 @@ export function ArquivoListingClient({
   }, [items, search, activeFilter])
 
   return (
-    <section className="px-6 md:px-12 pb-20">
+    <section className="px-6 md:px-12 py-24">
       <div className="max-w-7xl mx-auto">
 
         {/* Header row */}
@@ -156,9 +153,7 @@ export function ArquivoListingClient({
           <header className="flex flex-col gap-3 max-w-3xl">
             {eyebrow && <p className="font-eyebrow m-0">{eyebrow}</p>}
             <h2 className="m-0 text-blue">
-              {titleStart}
-              {titleAccent && <span className="text-orange">{titleAccent}</span>}
-              {titleEnd}
+              {parseTitle(title)}
             </h2>
           </header>
 

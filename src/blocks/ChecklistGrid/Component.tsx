@@ -1,7 +1,7 @@
 import React from 'react'
 import type { ChecklistGridBlock } from '@/payload-types'
 import { SectionTitle } from '@/home/sections'
-import { Orange } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 
 const CheckIcon = () => (
   <svg
@@ -21,9 +21,7 @@ const CheckIcon = () => (
 
 export const ChecklistGridComponent: React.FC<ChecklistGridBlock> = ({
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   items,
 }) => {
   return (
@@ -31,9 +29,7 @@ export const ChecklistGridComponent: React.FC<ChecklistGridBlock> = ({
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <SectionTitle eyebrow={eyebrow ?? undefined} align="center">
-            {titleStart}
-            {titleAccent && <Orange>{titleAccent}</Orange>}
-            {titleEnd}
+            {parseTitle(title)}
           </SectionTitle>
         </div>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 max-w-5xl mx-auto list-none p-0 m-0">

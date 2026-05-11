@@ -16,7 +16,6 @@ import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
-import { Home } from './Home/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -68,7 +67,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Arquivo, Portfolios, Media, Categories, Tags, PortfolioTags, ArquivoTags, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Home],
+  globals: [Header, Footer],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,

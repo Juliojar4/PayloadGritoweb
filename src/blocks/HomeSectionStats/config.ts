@@ -3,19 +3,19 @@ import type { Block } from 'payload'
 export const HomeSectionStats: Block = {
   slug: 'homeSectionStats',
   interfaceName: 'HomeSectionStatsBlock',
-  labels: { singular: 'Faixa de Estatísticas', plural: 'Faixa de Estatísticas' },
+  labels: { singular: 'Stats Strip', plural: 'Stats Strip' },
   imageURL: '/block-previews/stats.png',
-  imageAltText: 'Faixa de Estatísticas',
+  imageAltText: 'Stats Strip',
   fields: [
     {
       name: 'showDecoration',
-      label: 'Mostrar decorações (blob e pontos)',
+      label: 'Show decorations (blob and dots)',
       type: 'checkbox',
       defaultValue: true,
     },
     {
       name: 'stats',
-      label: 'Estatísticas',
+      label: 'Statistics',
       type: 'array',
       required: true,
       minRows: 1,
@@ -25,13 +25,13 @@ export const HomeSectionStats: Block = {
       fields: [
         {
           name: 'value',
-          label: 'Valor (ex: +120)',
+          label: 'Value (e.g.: +120)',
           type: 'text',
           required: true,
         },
         {
           name: 'label',
-          label: 'Rótulo (ex: Projetos entregues)',
+          label: 'Label (e.g.: Projects delivered)',
           type: 'text',
           required: true,
         },

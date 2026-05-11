@@ -6,9 +6,7 @@ import { ArquivoListingClient, type ArquivoItem, type FilterOption } from './Arq
 
 export const ArquivoListingComponent: React.FC<ArquivoListingBlock> = async ({
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   showYear,
   showSearch,
   showFilters,
@@ -67,9 +65,7 @@ export const ArquivoListingComponent: React.FC<ArquivoListingBlock> = async ({
       items={items}
       filters={filters}
       eyebrow={eyebrow}
-      titleStart={titleStart}
-      titleAccent={titleAccent}
-      titleEnd={titleEnd}
+      title={title}
       showYear={showYear ?? true}
       showSearch={showSearch ?? true}
       showFilters={showFilters ?? true}

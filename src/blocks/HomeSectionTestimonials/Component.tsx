@@ -1,13 +1,12 @@
 import React from 'react'
 import type { HomeSectionTestimonialsBlock } from '@/payload-types'
 import { SectionTitle, TestimonialsSection } from '@/home/sections'
-import { Orange } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { TestimonialCard } from '@/home/cards'
 
 export const HomeSectionTestimonialsComponent: React.FC<HomeSectionTestimonialsBlock> = ({
   eyebrow,
-  titleStart,
-  titleAccent,
+  title,
   description,
   ratingValue,
   reviewCount,
@@ -22,8 +21,7 @@ export const HomeSectionTestimonialsComponent: React.FC<HomeSectionTestimonialsB
             align="left"
             description={description ?? undefined}
           >
-            {titleStart}
-            <Orange>{titleAccent}</Orange>
+            {parseTitle(title)}
           </SectionTitle>
           <div className="mt-6 flex items-center gap-2">
             <div className="flex gap-0.5">

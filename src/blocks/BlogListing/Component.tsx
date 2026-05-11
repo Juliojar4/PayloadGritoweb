@@ -35,9 +35,7 @@ function normalizePost(post: PartialPost): PostItem {
 export const BlogListingComponent: React.FC<BlogListingBlock> = async ({
   featuredPost,
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   postsPerPage,
   showSearch,
   showFilters,
@@ -104,9 +102,7 @@ export const BlogListingComponent: React.FC<BlogListingBlock> = async ({
       filters={filters}
       featuredPost={featured}
       eyebrow={eyebrow}
-      titleStart={titleStart}
-      titleAccent={titleAccent}
-      titleEnd={titleEnd}
+      title={title}
       postsPerPage={postsPerPage ?? 9}
       showSearch={showSearch ?? true}
       showFilters={showFilters ?? true}

@@ -1,14 +1,12 @@
 import React from 'react'
 import type { FaqBlockBlock } from '@/payload-types'
 import { SectionTitle } from '@/home/sections'
-import { Orange } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { FaqAccordion } from './Component.client'
 
 export const FaqBlockComponent: React.FC<FaqBlockBlock> = ({
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   defaultOpenIndex,
   items,
 }) => {
@@ -17,9 +15,7 @@ export const FaqBlockComponent: React.FC<FaqBlockBlock> = ({
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-14">
           <SectionTitle eyebrow={eyebrow ?? undefined} align="center">
-            {titleStart}
-            {titleAccent && <Orange>{titleAccent}</Orange>}
-            {titleEnd}
+            {parseTitle(title)}
           </SectionTitle>
         </div>
         <FaqAccordion

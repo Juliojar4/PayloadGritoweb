@@ -20,7 +20,7 @@ export const ArquivoTags: CollectionConfig = {
   fields: [
     {
       name: 'title',
-      label: 'Título',
+      label: 'Title',
       type: 'text',
       required: true,
     },

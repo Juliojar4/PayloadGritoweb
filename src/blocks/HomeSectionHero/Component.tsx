@@ -3,7 +3,8 @@ import Image from 'next/image'
 import type { HomeSectionHeroBlock } from '@/payload-types'
 import type { Media } from '@/payload-types'
 import { HeroSection } from '@/home/sections'
-import { Button, Orange } from '@/home/primitives'
+import { Button } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { Sparkle } from '@/home/illustrations'
 
 const ArrowRight = () => (
@@ -20,10 +21,8 @@ const ArrowRight = () => (
 )
 
 export const HomeSectionHeroComponent: React.FC<HomeSectionHeroBlock> = ({
-  titlePart1,
-  titleAccent1,
-  titlePart2,
-  titleAccent2,
+  eyebrow,
+  title,
   description,
   cta1Label,
   cta1Href,
@@ -33,28 +32,28 @@ export const HomeSectionHeroComponent: React.FC<HomeSectionHeroBlock> = ({
 }) => {
   const media = image as Media
 
+  const hasActions = cta1Label || cta2Label
+
   return (
     <HeroSection
-      title={
-        <>
-          <span className="font-light">{titlePart1}</span>
-          <Orange>{titleAccent1}</Orange>,<br />
-          <span className="font-light">{titlePart2}</span>
-          <Orange>{titleAccent2}</Orange>
-        </>
-      }
+      eyebrow={eyebrow ?? undefined}
+      title={parseTitle(title, 'font-light')}
       description={description}
       actions={
-        <>
-          <Button href={cta1Href} icon={<ArrowRight />}>
-            {cta1Label}
-          </Button>
-          {cta2Label && (
-            <Button href={cta2Href ?? '#'} variant="ghost">
-              {cta2Label}
-            </Button>
-          )}
-        </>
+        hasActions ? (
+          <>
+            {cta1Label && (
+              <Button href={cta1Href ?? '#'} icon={<ArrowRight />}>
+                {cta1Label}
+              </Button>
+            )}
+            {cta2Label && (
+              <Button href={cta2Href ?? '#'} variant="ghost">
+                {cta2Label}
+              </Button>
+            )}
+          </>
+        ) : undefined
       }
       media={
         media && typeof media !== 'string' ? (

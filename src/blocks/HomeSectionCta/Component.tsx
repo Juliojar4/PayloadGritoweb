@@ -44,7 +44,7 @@ export const HomeSectionCtaComponent: React.FC<HomeSectionCtaBlock> = ({
 
   return (
     <CtaBanner
-      variant={(variant as 'blue' | 'orange') ?? 'orange'}
+      variant={(variant as 'blue' | 'orange' | 'white') ?? 'orange'}
       eyebrow={eyebrow ?? undefined}
       title={
         <>

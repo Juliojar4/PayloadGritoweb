@@ -1,7 +1,8 @@
 import React from 'react'
 import type { HomeSectionProjectsBlock } from '@/payload-types'
 import { SectionTitle, ProjectGrid } from '@/home/sections'
-import { Button, Orange } from '@/home/primitives'
+import { Button } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { ProjectCard } from '@/home/cards'
 import { TagMark, ArrowCurve } from '@/home/illustrations'
 
@@ -53,8 +54,7 @@ function Motif({ type }: { type: MotifType }) {
 
 export const HomeSectionProjectsComponent: React.FC<HomeSectionProjectsBlock> = ({
   eyebrow,
-  titleStart,
-  titleAccent,
+  title,
   portfolioLabel,
   portfolioHref,
   projects,
@@ -64,8 +64,7 @@ export const HomeSectionProjectsComponent: React.FC<HomeSectionProjectsBlock> = 
       <div className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-9">
           <SectionTitle eyebrow={eyebrow} align="left">
-            {titleStart}
-            <Orange>{titleAccent}</Orange>
+            {parseTitle(title)}
           </SectionTitle>
           {portfolioLabel && (
             <Button variant="ghost" href={portfolioHref ?? '#'} icon={<ArrowRight />}>

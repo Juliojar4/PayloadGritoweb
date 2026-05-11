@@ -7,11 +7,11 @@ export const BlogListing: Block = {
   fields: [
     {
       name: 'featuredPost',
-      label: 'Post em destaque',
+      label: 'Featured post',
       type: 'relationship',
       relationTo: 'posts',
       admin: {
-        description: 'Aparece em banner acima da listagem. Deixe vazio para ocultar.',
+        description: 'Appears as a banner above the listing. Leave empty to hide.',
       },
     },
     {
@@ -21,24 +21,15 @@ export const BlogListing: Block = {
       defaultValue: 'Arquivo',
     },
     {
-      name: 'titleStart',
-      label: 'Título — início',
+      name: 'title',
+      label: 'Título',
       type: 'text',
-    },
-    {
-      name: 'titleAccent',
-      label: 'Título — destaque (laranja)',
-      type: 'text',
-      defaultValue: 'Últimos posts',
-    },
-    {
-      name: 'titleEnd',
-      label: 'Título — fim',
-      type: 'text',
+      defaultValue: '*Últimos posts*',
+      admin: { description: 'Use *palavra* para laranja. Use \\n para quebra de linha.' },
     },
     {
       name: 'postsPerPage',
-      label: 'Posts por página',
+      label: 'Posts per page',
       type: 'number',
       defaultValue: 9,
       min: 3,
@@ -46,13 +37,13 @@ export const BlogListing: Block = {
     },
     {
       name: 'showSearch',
-      label: 'Exibir busca',
+      label: 'Show search',
       type: 'checkbox',
       defaultValue: true,
     },
     {
       name: 'showFilters',
-      label: 'Exibir filtros por categoria',
+      label: 'Show filters by category',
       type: 'checkbox',
       defaultValue: true,
     },

@@ -12,12 +12,12 @@ const services = [
   { label: 'Landing Pages', href: '#' },
   { label: 'UX/UI Design', href: '#' },
   { label: 'Branding', href: '#' },
-  { label: 'Soluções Digitais', href: '#' },
+  { label: 'Digital Solutions', href: '#' },
 ]
 
 const policies = [
-  { label: 'Política de Privacidade', href: '#' },
-  { label: 'Termos de Uso', href: '#' },
+  { label: 'Privacy Policy', href: '#' },
+  { label: 'Terms of Use', href: '#' },
   { label: 'Cookies & LGPD', href: '#' },
 ]
 
@@ -73,9 +73,9 @@ const contact = {
 }
 
 const description =
-  'Estúdio digital especializado em WordPress, e-commerce e produtos web sob medida. Sorocaba, SP — desde 2017.'
+  'Digital studio specializing in WordPress, e-commerce and custom web products. Sorocaba, SP — since 2017.'
 
-const copyright = '© 2026 GritoWeb · CNPJ 27.467.329/0001-13 · Todos os direitos reservados.'
+const copyright = '© 2026 GritoWeb · CNPJ 27.467.329/0001-13 · All rights reserved.'
 
 const columnTitleClasses = 'font-display font-bold text-xs uppercase tracking-[0.12em] text-orange m-0'
 
@@ -151,11 +151,11 @@ export async function Footer() {
             </ul>
           </div>
 
-          <LinkColumn title="Navegação" items={nav} />
-          <LinkColumn title="Serviços" items={services} />
+          <LinkColumn title="Navigation" items={nav} />
+          <LinkColumn title="Services" items={services} />
 
           <div>
-            <h3 className={columnTitleClasses}>Contato</h3>
+            <h3 className={columnTitleClasses}>Contact</h3>
             <address className={`${listClasses} not-italic`}>
               <a href={contact.emailHref} className={linkClasses}>
                 {contact.email}

@@ -11,30 +11,22 @@ export const FaqBlock: Block = {
       type: 'text',
     },
     {
-      name: 'titleStart',
-      label: 'Título — início',
+      name: 'title',
+      label: 'Título',
       type: 'text',
       required: true,
-    },
-    {
-      name: 'titleAccent',
-      label: 'Título — destaque (laranja)',
-      type: 'text',
-    },
-    {
-      name: 'titleEnd',
-      label: 'Título — fim',
-      type: 'text',
+      defaultValue: 'Perguntas *frequentes*',
+      admin: { description: 'Use *palavra* para laranja. Use \\n para quebra de linha.' },
     },
     {
       name: 'defaultOpenIndex',
-      label: 'Índice aberto por padrão (0-based, -1 para fechar todos)',
+      label: 'Default open index (0-based, -1 to close all)',
       type: 'number',
       defaultValue: 0,
     },
     {
       name: 'items',
-      label: 'Perguntas e respostas',
+      label: 'Questions and answers',
       type: 'array',
       required: true,
       minRows: 1,
@@ -44,13 +36,13 @@ export const FaqBlock: Block = {
       fields: [
         {
           name: 'question',
-          label: 'Pergunta',
+          label: 'Question',
           type: 'text',
           required: true,
         },
         {
           name: 'answer',
-          label: 'Resposta',
+          label: 'Answer',
           type: 'textarea',
           required: true,
         },

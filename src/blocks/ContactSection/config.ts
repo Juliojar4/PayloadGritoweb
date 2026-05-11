@@ -3,7 +3,7 @@ import type { Block } from 'payload'
 export const ContactSection: Block = {
   slug: 'contactSection',
   interfaceName: 'ContactSectionBlock',
-  labels: { singular: 'Seção de Contato (Formulário)', plural: 'Seções de Contato (Formulário)' },
+  labels: { singular: 'Contact Section (Form)', plural: 'Contact Sections (Form)' },
   fields: [
     {
       name: 'eyebrow',
@@ -12,68 +12,68 @@ export const ContactSection: Block = {
     },
     {
       name: 'heading',
-      label: 'Título',
+      label: 'Heading',
       type: 'text',
     },
     {
       name: 'sidebarEyebrow',
-      label: 'Eyebrow da sidebar',
+      label: 'Sidebar eyebrow',
       type: 'text',
       defaultValue: 'Fale direto',
     },
     {
       name: 'successTitle',
-      label: 'Título de sucesso',
+      label: 'Success title',
       type: 'text',
       defaultValue: 'Mensagem enviada',
     },
     {
       name: 'successMessage',
-      label: 'Mensagem de sucesso',
+      label: 'Success message',
       type: 'textarea',
       defaultValue:
         'Recebemos sua mensagem. Em até 3 dias úteis um de nós entra em contato.',
     },
     {
       name: 'channels',
-      label: 'Canais de contato',
+      label: 'Contact channels',
       type: 'array',
       admin: { initCollapsed: true },
       fields: [
         {
           name: 'icon',
-          label: 'Ícone',
+          label: 'Icon',
           type: 'select',
           required: true,
           options: [
-            { label: 'E-mail', value: 'email' },
-            { label: 'Telefone', value: 'phone' },
+            { label: 'Email', value: 'email' },
+            { label: 'Phone', value: 'phone' },
             { label: 'WhatsApp', value: 'whatsapp' },
             { label: 'Instagram', value: 'instagram' },
             { label: 'LinkedIn', value: 'linkedin' },
-            { label: 'Localização', value: 'location' },
+            { label: 'Location', value: 'location' },
           ],
         },
         {
           name: 'label',
-          label: 'Rótulo',
+          label: 'Label',
           type: 'text',
           required: true,
         },
         {
           name: 'value',
-          label: 'Valor exibido',
+          label: 'Displayed value',
           type: 'text',
           required: true,
         },
         {
           name: 'hint',
-          label: 'Dica (opcional)',
+          label: 'Hint (optional)',
           type: 'text',
         },
         {
           name: 'href',
-          label: 'Link (opcional)',
+          label: 'Link (optional)',
           type: 'text',
         },
       ],

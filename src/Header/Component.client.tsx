@@ -61,11 +61,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               </li>
             )
           })}
-          <li>
-            <Button variant="blue" size="sm" href="/contato">
-              Agendar uma call
-            </Button>
-          </li>
         </ul>
       </nav>
     </header>

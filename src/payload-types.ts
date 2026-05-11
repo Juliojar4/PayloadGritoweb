@@ -122,12 +122,10 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
-    home: Home;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    home: HomeSelect<false> | HomeSelect<true>;
   };
   locale: null;
   widgets: {
@@ -239,6 +237,8 @@ export interface Page {
     | ContactSectionBlock
     | BlogListingBlock
     | ArquivoListingBlock
+    | LatestPortfoliosBlock
+    | LatestPostsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -267,7 +267,7 @@ export interface Post {
   title: string;
   heroImage?: (string | null) | Media;
   /**
-   * Texto curto exibido na listagem de posts. Máximo recomendado: 160 caracteres.
+   * Short text shown in the posts listing. Recommended maximum: 160 characters.
    */
   excerpt?: string | null;
   content: {
@@ -881,13 +881,14 @@ export interface ThreeCardsBlock {
  * via the `definition` "HomeSectionHeroBlock".
  */
 export interface HomeSectionHeroBlock {
-  titlePart1: string;
-  titleAccent1: string;
-  titlePart2: string;
-  titleAccent2: string;
+  eyebrow?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title: string;
   description: string;
-  cta1Label: string;
-  cta1Href: string;
+  cta1Label?: string | null;
+  cta1Href?: string | null;
   cta2Label?: string | null;
   cta2Href?: string | null;
   image: string | Media;
@@ -901,9 +902,10 @@ export interface HomeSectionHeroBlock {
  */
 export interface HomeSectionLogoCloudBlock {
   eyebrow: string;
-  titleStart: string;
-  titleAccent: string;
-  titleEnd?: string | null;
+  /**
+   * Use *palavra* para laranja.
+   */
+  title: string;
   description?: string | null;
   partners: {
     name: string;
@@ -931,10 +933,11 @@ export interface HomeSectionLogoCloudBlock {
  * via the `definition` "HomeSectionServicesBlock".
  */
 export interface HomeSectionServicesBlock {
-  eyebrow: string;
-  titleStart: string;
-  titleAccent: string;
-  titleEnd?: string | null;
+  eyebrow?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title?: string | null;
   description?: string | null;
   services: {
     name: string;
@@ -942,7 +945,7 @@ export interface HomeSectionServicesBlock {
     description: string;
     iconType: 'globe' | 'cart' | 'landing' | 'screen' | 'brand' | 'code';
     /**
-     * Itens com ✓ que aparecem abaixo da descrição.
+     * ✓ items that appear below the description.
      */
     bullets?:
       | {
@@ -964,10 +967,10 @@ export interface HomeSectionServicesBlock {
  */
 export interface HomeSectionAboutBlock {
   eyebrow: string;
-  titlePart1: string;
-  titleAccent1: string;
-  titlePart2?: string | null;
-  titleAccent2?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title: string;
   description: string;
   ctaLabel: string;
   ctaHref: string;
@@ -987,8 +990,10 @@ export interface HomeSectionAboutBlock {
  */
 export interface HomeSectionProjectsBlock {
   eyebrow: string;
-  titleStart: string;
-  titleAccent: string;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title: string;
   portfolioLabel?: string | null;
   portfolioHref?: string | null;
   projects: {
@@ -1012,13 +1017,15 @@ export interface HomeSectionProjectsBlock {
  * via the `definition` "HomeSectionProcessBlock".
  */
 export interface HomeSectionProcessBlock {
+  background?: ('dark' | 'white') | null;
   eyebrow: string;
-  titleStart: string;
-  titleAccent: string;
-  titleEnd?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title: string;
   description?: string | null;
   /**
-   * O número do passo que será destacado em laranja (0 = primeiro).
+   * The step number that will be highlighted in orange (0 = first).
    */
   highlightIndex?: number | null;
   steps: {
@@ -1051,8 +1058,10 @@ export interface HomeSectionStatsBlock {
  */
 export interface HomeSectionTestimonialsBlock {
   eyebrow: string;
-  titleStart: string;
-  titleAccent: string;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title: string;
   description?: string | null;
   ratingValue: string;
   reviewCount: string;
@@ -1074,9 +1083,10 @@ export interface HomeSectionTestimonialsBlock {
  */
 export interface HomeSectionBlogBlock {
   eyebrow: string;
-  titleStart: string;
-  titleAccent: string;
-  titleEnd?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title: string;
   blogLabel?: string | null;
   blogHref?: string | null;
   posts: {
@@ -1097,7 +1107,7 @@ export interface HomeSectionBlogBlock {
  * via the `definition` "HomeSectionCtaBlock".
  */
 export interface HomeSectionCtaBlock {
-  variant: 'blue' | 'orange';
+  variant: 'blue' | 'orange' | 'white';
   eyebrow?: string | null;
   titleMain: string;
   titleSecondary: string;
@@ -1133,9 +1143,10 @@ export interface HomeSectionContactBlock {
  */
 export interface ChecklistGridBlock {
   eyebrow?: string | null;
-  titleStart: string;
-  titleAccent?: string | null;
-  titleEnd?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title: string;
   items: {
     title: string;
     description?: string | null;
@@ -1151,9 +1162,10 @@ export interface ChecklistGridBlock {
  */
 export interface FaqBlockBlock {
   eyebrow?: string | null;
-  titleStart: string;
-  titleAccent?: string | null;
-  titleEnd?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title: string;
   defaultOpenIndex?: number | null;
   items: {
     question: string;
@@ -1183,16 +1195,18 @@ export interface PullQuoteBlock {
  */
 export interface ProjectGridAsymmetricBlock {
   eyebrow?: string | null;
-  titleStart?: string | null;
-  titleAccent?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title?: string | null;
   portfolioLabel?: string | null;
   portfolioHref?: string | null;
   /**
-   * Máximo de projetos exibidos. Padrão: 5.
+   * Maximum projects displayed. Default: 5.
    */
   limit?: number | null;
   /**
-   * Deixe vazio para mostrar os projetos mais recentes automaticamente.
+   * Leave empty to automatically show the most recent projects.
    */
   selectedProjects?: (string | Portfolio)[] | null;
   id?: string | null;
@@ -1270,13 +1284,14 @@ export interface ContactSectionBlock {
  */
 export interface BlogListingBlock {
   /**
-   * Aparece em banner acima da listagem. Deixe vazio para ocultar.
+   * Appears as a banner above the listing. Leave empty to hide.
    */
   featuredPost?: (string | null) | Post;
   eyebrow?: string | null;
-  titleStart?: string | null;
-  titleAccent?: string | null;
-  titleEnd?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title?: string | null;
   postsPerPage?: number | null;
   showSearch?: boolean | null;
   showFilters?: boolean | null;
@@ -1290,15 +1305,48 @@ export interface BlogListingBlock {
  */
 export interface ArquivoListingBlock {
   eyebrow?: string | null;
-  titleStart?: string | null;
-  titleAccent?: string | null;
-  titleEnd?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title?: string | null;
   showYear?: boolean | null;
   showSearch?: boolean | null;
   showFilters?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'arquivoListing';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPortfoliosBlock".
+ */
+export interface LatestPortfoliosBlock {
+  eyebrow?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title?: string | null;
+  portfolioLabel?: string | null;
+  portfolioHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'latestPortfolios';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPostsBlock".
+ */
+export interface LatestPostsBlock {
+  eyebrow?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title?: string | null;
+  blogLabel?: string | null;
+  blogHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'latestPosts';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1313,7 +1361,7 @@ export interface Arquivo {
   result?: string | null;
   heroImage?: (string | null) | Media;
   /**
-   * Texto curto exibido na listagem. Máximo recomendado: 160 caracteres.
+   * Short text shown in the listing. Recommended maximum: 160 characters.
    */
   excerpt?: string | null;
   content?: {
@@ -1719,6 +1767,8 @@ export interface PagesSelect<T extends boolean = true> {
         contactSection?: T | ContactSectionBlockSelect<T>;
         blogListing?: T | BlogListingBlockSelect<T>;
         arquivoListing?: T | ArquivoListingBlockSelect<T>;
+        latestPortfolios?: T | LatestPortfoliosBlockSelect<T>;
+        latestPosts?: T | LatestPostsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1855,10 +1905,8 @@ export interface ThreeCardsBlockSelect<T extends boolean = true> {
  * via the `definition` "HomeSectionHeroBlock_select".
  */
 export interface HomeSectionHeroBlockSelect<T extends boolean = true> {
-  titlePart1?: T;
-  titleAccent1?: T;
-  titlePart2?: T;
-  titleAccent2?: T;
+  eyebrow?: T;
+  title?: T;
   description?: T;
   cta1Label?: T;
   cta1Href?: T;
@@ -1874,9 +1922,7 @@ export interface HomeSectionHeroBlockSelect<T extends boolean = true> {
  */
 export interface HomeSectionLogoCloudBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
   description?: T;
   partners?:
     | T
@@ -1894,9 +1940,7 @@ export interface HomeSectionLogoCloudBlockSelect<T extends boolean = true> {
  */
 export interface HomeSectionServicesBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
   description?: T;
   services?:
     | T
@@ -1924,10 +1968,7 @@ export interface HomeSectionServicesBlockSelect<T extends boolean = true> {
  */
 export interface HomeSectionAboutBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titlePart1?: T;
-  titleAccent1?: T;
-  titlePart2?: T;
-  titleAccent2?: T;
+  title?: T;
   description?: T;
   ctaLabel?: T;
   ctaHref?: T;
@@ -1948,8 +1989,7 @@ export interface HomeSectionAboutBlockSelect<T extends boolean = true> {
  */
 export interface HomeSectionProjectsBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
+  title?: T;
   portfolioLabel?: T;
   portfolioHref?: T;
   projects?:
@@ -1974,10 +2014,9 @@ export interface HomeSectionProjectsBlockSelect<T extends boolean = true> {
  * via the `definition` "HomeSectionProcessBlock_select".
  */
 export interface HomeSectionProcessBlockSelect<T extends boolean = true> {
+  background?: T;
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
   description?: T;
   highlightIndex?: T;
   steps?:
@@ -2012,8 +2051,7 @@ export interface HomeSectionStatsBlockSelect<T extends boolean = true> {
  */
 export interface HomeSectionTestimonialsBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
+  title?: T;
   description?: T;
   ratingValue?: T;
   reviewCount?: T;
@@ -2036,9 +2074,7 @@ export interface HomeSectionTestimonialsBlockSelect<T extends boolean = true> {
  */
 export interface HomeSectionBlogBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
   blogLabel?: T;
   blogHref?: T;
   posts?:
@@ -2094,9 +2130,7 @@ export interface HomeSectionContactBlockSelect<T extends boolean = true> {
  */
 export interface ChecklistGridBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
   items?:
     | T
     | {
@@ -2113,9 +2147,7 @@ export interface ChecklistGridBlockSelect<T extends boolean = true> {
  */
 export interface FaqBlockBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
   defaultOpenIndex?: T;
   items?:
     | T
@@ -2145,8 +2177,7 @@ export interface PullQuoteBlockSelect<T extends boolean = true> {
  */
 export interface ProjectGridAsymmetricBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
+  title?: T;
   portfolioLabel?: T;
   portfolioHref?: T;
   limit?: T;
@@ -2184,9 +2215,7 @@ export interface ContactSectionBlockSelect<T extends boolean = true> {
 export interface BlogListingBlockSelect<T extends boolean = true> {
   featuredPost?: T;
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
   postsPerPage?: T;
   showSearch?: T;
   showFilters?: T;
@@ -2199,12 +2228,34 @@ export interface BlogListingBlockSelect<T extends boolean = true> {
  */
 export interface ArquivoListingBlockSelect<T extends boolean = true> {
   eyebrow?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
   showYear?: T;
   showSearch?: T;
   showFilters?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPortfoliosBlock_select".
+ */
+export interface LatestPortfoliosBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  portfolioLabel?: T;
+  portfolioHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPostsBlock_select".
+ */
+export interface LatestPostsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  blogLabel?: T;
+  blogHref?: T;
   id?: T;
   blockName?: T;
 }
@@ -2802,28 +2853,6 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home".
- */
-export interface Home {
-  id: string;
-  layout: (
-    | HomeSectionHeroBlock
-    | HomeSectionLogoCloudBlock
-    | HomeSectionServicesBlock
-    | HomeSectionAboutBlock
-    | HomeSectionProjectsBlock
-    | HomeSectionProcessBlock
-    | HomeSectionStatsBlock
-    | HomeSectionTestimonialsBlock
-    | HomeSectionBlogBlock
-    | HomeSectionCtaBlock
-    | HomeSectionContactBlock
-  )[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2863,30 +2892,6 @@ export interface FooterSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home_select".
- */
-export interface HomeSelect<T extends boolean = true> {
-  layout?:
-    | T
-    | {
-        homeSectionHero?: T | HomeSectionHeroBlockSelect<T>;
-        homeSectionLogoCloud?: T | HomeSectionLogoCloudBlockSelect<T>;
-        homeSectionServices?: T | HomeSectionServicesBlockSelect<T>;
-        homeSectionAbout?: T | HomeSectionAboutBlockSelect<T>;
-        homeSectionProjects?: T | HomeSectionProjectsBlockSelect<T>;
-        homeSectionProcess?: T | HomeSectionProcessBlockSelect<T>;
-        homeSectionStats?: T | HomeSectionStatsBlockSelect<T>;
-        homeSectionTestimonials?: T | HomeSectionTestimonialsBlockSelect<T>;
-        homeSectionBlog?: T | HomeSectionBlogBlockSelect<T>;
-        homeSectionCta?: T | HomeSectionCtaBlockSelect<T>;
-        homeSectionContact?: T | HomeSectionContactBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;

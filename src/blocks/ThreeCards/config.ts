@@ -10,13 +10,13 @@ export const ThreeCards: Block = {
   fields: [
     {
       name: 'sectionTitle',
-      label: 'Título da Seção',
+      label: 'Section title',
       type: 'text',
       required: true,
     },
     {
       name: 'sectionTitleHighlight',
-      label: 'Destaque do Título (cor secundária)',
+      label: 'Title accent (secondary color)',
       type: 'text',
       required: true,
     },
@@ -44,13 +44,13 @@ export const ThreeCards: Block = {
       fields: [
         {
           name: 'borderColor',
-          label: 'Cor da borda',
+          label: 'Border color',
           type: 'select',
           required: true,
           defaultValue: 'primary',
           options: [
-            { label: 'Primária (azul)', value: 'primary' },
-            { label: 'Secundária (laranja)', value: 'secondary' },
+            { label: 'Primary (blue)', value: 'primary' },
+            { label: 'Secondary (orange)', value: 'secondary' },
           ],
         },
         {
@@ -66,7 +66,7 @@ export const ThreeCards: Block = {
         },
         {
           name: 'titleHighlight',
-          label: 'Destaque no título (cor secundária)',
+          label: 'Title accent (secondary color)',
           type: 'text',
         },
         {

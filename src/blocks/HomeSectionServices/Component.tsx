@@ -1,7 +1,7 @@
 import React from 'react'
 import type { HomeSectionServicesBlock } from '@/payload-types'
 import { SectionTitle, ServiceGrid } from '@/home/sections'
-import { Orange } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { ServiceCard } from '@/home/cards'
 
 type IconType = 'globe' | 'cart' | 'landing' | 'screen' | 'brand' | 'code'
@@ -102,9 +102,7 @@ const ServiceIcon = ({ type }: { type: IconType }) => {
 
 export const HomeSectionServicesComponent: React.FC<HomeSectionServicesBlock> = ({
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   description,
   services,
 }) => {
@@ -112,16 +110,8 @@ export const HomeSectionServicesComponent: React.FC<HomeSectionServicesBlock> = 
     <section className="px-12 pt-24 pb-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-10">
-          <SectionTitle eyebrow={eyebrow} align="left">
-            {titleStart}
-            <Orange>{titleAccent}</Orange>
-            {titleEnd &&
-              titleEnd.split('\n').map((part, i) => (
-                <span key={i}>
-                  {i > 0 && <br />}
-                  {part}
-                </span>
-              ))}
+          <SectionTitle eyebrow={eyebrow ?? undefined} align="left">
+            {parseTitle(title)}
           </SectionTitle>
           {description && (
             <p className="max-w-md text-mute body-text m-0">{description}</p>

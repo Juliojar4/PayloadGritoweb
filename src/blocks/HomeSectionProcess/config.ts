@@ -3,10 +3,20 @@ import type { Block } from 'payload'
 export const HomeSectionProcess: Block = {
   slug: 'homeSectionProcess',
   interfaceName: 'HomeSectionProcessBlock',
-  labels: { singular: 'Seção de Processo', plural: 'Seção de Processo' },
+  labels: { singular: 'Process Section', plural: 'Process Section' },
   imageURL: '/block-previews/processo.png',
-  imageAltText: 'Seção de Processo',
+  imageAltText: 'Process Section',
   fields: [
+    {
+      name: 'background',
+      label: 'Background',
+      type: 'select',
+      defaultValue: 'dark',
+      options: [
+        { label: 'Escuro (padrão)', value: 'dark' },
+        { label: 'Branco', value: 'white' },
+      ],
+    },
     {
       name: 'eyebrow',
       label: 'Eyebrow',
@@ -15,42 +25,30 @@ export const HomeSectionProcess: Block = {
       defaultValue: 'Como trabalhamos',
     },
     {
-      name: 'titleStart',
-      label: 'Título — início',
+      name: 'title',
+      label: 'Título',
       type: 'text',
       required: true,
-      defaultValue: 'Um ',
-    },
-    {
-      name: 'titleAccent',
-      label: 'Título — destaque (laranja)',
-      type: 'text',
-      required: true,
-      defaultValue: 'processo claro',
-    },
-    {
-      name: 'titleEnd',
-      label: 'Título — fim',
-      type: 'text',
-      defaultValue: ', do briefing ao go-live',
+      defaultValue: 'Um *processo claro*, do briefing ao go-live',
+      admin: { description: 'Use *palavra* para laranja. Use \\n para quebra de linha.' },
     },
     {
       name: 'description',
-      label: 'Descrição',
+      label: 'Description',
       type: 'textarea',
     },
     {
       name: 'highlightIndex',
-      label: 'Índice do passo em destaque (0-based)',
+      label: 'Highlighted step index (0-based)',
       type: 'number',
       defaultValue: 2,
       admin: {
-        description: 'O número do passo que será destacado em laranja (0 = primeiro).',
+        description: 'The step number that will be highlighted in orange (0 = first).',
       },
     },
     {
       name: 'steps',
-      label: 'Passos do processo',
+      label: 'Process steps',
       type: 'array',
       required: true,
       minRows: 1,
@@ -60,13 +58,13 @@ export const HomeSectionProcess: Block = {
       fields: [
         {
           name: 'title',
-          label: 'Título',
+          label: 'Title',
           type: 'text',
           required: true,
         },
         {
           name: 'description',
-          label: 'Descrição',
+          label: 'Description',
           type: 'textarea',
         },
       ],

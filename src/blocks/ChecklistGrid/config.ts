@@ -11,24 +11,16 @@ export const ChecklistGrid: Block = {
       type: 'text',
     },
     {
-      name: 'titleStart',
-      label: 'Título — início',
+      name: 'title',
+      label: 'Título',
       type: 'text',
       required: true,
-    },
-    {
-      name: 'titleAccent',
-      label: 'Título — destaque (laranja)',
-      type: 'text',
-    },
-    {
-      name: 'titleEnd',
-      label: 'Título — fim',
-      type: 'text',
+      defaultValue: 'Por que *a diferença* nessa parceria',
+      admin: { description: 'Use *palavra* para laranja. Use \\n para quebra de linha.' },
     },
     {
       name: 'items',
-      label: 'Itens do checklist',
+      label: 'Checklist items',
       type: 'array',
       required: true,
       minRows: 1,
@@ -38,13 +30,13 @@ export const ChecklistGrid: Block = {
       fields: [
         {
           name: 'title',
-          label: 'Título',
+          label: 'Title',
           type: 'text',
           required: true,
         },
         {
           name: 'description',
-          label: 'Descrição',
+          label: 'Description',
           type: 'textarea',
         },
       ],

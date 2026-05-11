@@ -3,7 +3,7 @@ import type { Block } from 'payload'
 export const ProjectGridAsymmetric: Block = {
   slug: 'projectGridAsymmetric',
   interfaceName: 'ProjectGridAsymmetricBlock',
-  labels: { singular: 'Grid de Portfólio', plural: 'Grids de Portfólio' },
+  labels: { singular: 'Portfolio Grid', plural: 'Portfolio Grids' },
   fields: [
     {
       name: 'eyebrow',
@@ -12,48 +12,43 @@ export const ProjectGridAsymmetric: Block = {
       defaultValue: 'Nossos projetos',
     },
     {
-      name: 'titleStart',
-      label: 'Título — início',
+      name: 'title',
+      label: 'Título',
       type: 'text',
-      defaultValue: 'Projetos que ',
-    },
-    {
-      name: 'titleAccent',
-      label: 'Título — destaque (laranja)',
-      type: 'text',
-      defaultValue: 'colocamos pra rodar',
+      defaultValue: 'Projetos que *colocamos pra rodar*',
+      admin: { description: 'Use *palavra* para laranja. Use \\n para quebra de linha.' },
     },
     {
       name: 'portfolioLabel',
-      label: 'Botão — texto',
+      label: 'Button — text',
       type: 'text',
       defaultValue: 'Ver portfólio completo',
     },
     {
       name: 'portfolioHref',
-      label: 'Botão — link',
+      label: 'Button — link',
       type: 'text',
       defaultValue: '/portfolio',
     },
     {
       name: 'limit',
-      label: 'Quantidade de projetos',
+      label: 'Number of projects',
       type: 'number',
       defaultValue: 5,
       min: 1,
       max: 12,
       admin: {
-        description: 'Máximo de projetos exibidos. Padrão: 5.',
+        description: 'Maximum projects displayed. Default: 5.',
       },
     },
     {
       name: 'selectedProjects',
-      label: 'Projetos em destaque (opcional)',
+      label: 'Featured projects (optional)',
       type: 'relationship',
       relationTo: 'portfolios',
       hasMany: true,
       admin: {
-        description: 'Deixe vazio para mostrar os projetos mais recentes automaticamente.',
+        description: 'Leave empty to automatically show the most recent projects.',
       },
     },
   ],

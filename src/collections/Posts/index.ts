@@ -86,10 +86,10 @@ export const Posts: CollectionConfig<'posts'> = {
             },
             {
               name: 'excerpt',
-              label: 'Resumo',
+              label: 'Excerpt',
               type: 'textarea',
               admin: {
-                description: 'Texto curto exibido na listagem de posts. Máximo recomendado: 160 caracteres.',
+                description: 'Short text shown in the posts listing. Recommended maximum: 160 characters.',
               },
             },
             {

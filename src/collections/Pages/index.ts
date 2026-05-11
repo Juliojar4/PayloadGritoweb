@@ -27,6 +27,8 @@ import { ProjectGridAsymmetric } from '../../blocks/ProjectGridAsymmetric/config
 import { ContactSection } from '../../blocks/ContactSection/config'
 import { BlogListing } from '../../blocks/BlogListing/config'
 import { ArquivoListing } from '../../blocks/ArquivoListing/config'
+import { LatestPortfolios } from '../../blocks/LatestPortfolios/config'
+import { LatestPosts } from '../../blocks/LatestPosts/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -118,6 +120,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 ContactSection,
                 BlogListing,
                 ArquivoListing,
+                LatestPortfolios,
+                LatestPosts,
               ],
               required: true,
               admin: {

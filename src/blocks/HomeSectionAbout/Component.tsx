@@ -3,7 +3,8 @@ import Image from 'next/image'
 import type { HomeSectionAboutBlock } from '@/payload-types'
 import type { Media } from '@/payload-types'
 import { AboutSplit, AboutFeatures } from '@/home/sections'
-import { Button, Orange } from '@/home/primitives'
+import { Button } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 
 const ArrowRight = () => (
   <svg
@@ -20,10 +21,7 @@ const ArrowRight = () => (
 
 export const HomeSectionAboutComponent: React.FC<HomeSectionAboutBlock> = ({
   eyebrow,
-  titlePart1,
-  titleAccent1,
-  titlePart2,
-  titleAccent2,
+  title,
   description,
   ctaLabel,
   ctaHref,
@@ -48,16 +46,7 @@ export const HomeSectionAboutComponent: React.FC<HomeSectionAboutBlock> = ({
     >
       <p className="font-eyebrow m-0 mb-2">{eyebrow}</p>
       <h2 className="m-0 text-blue">
-        {titlePart1}
-        <Orange>{titleAccent1}</Orange>
-        {titlePart2 &&
-          titlePart2.split('\n').map((part, i) => (
-            <span key={i}>
-              {i > 0 && <br />}
-              {part}
-            </span>
-          ))}
-        {titleAccent2 && <Orange>{titleAccent2}</Orange>}
+        {parseTitle(title)}
       </h2>
       <p className="body-text mt-4 text-ink-soft">{description}</p>
       <AboutFeatures

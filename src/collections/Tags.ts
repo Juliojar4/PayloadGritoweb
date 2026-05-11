@@ -20,7 +20,7 @@ export const Tags: CollectionConfig = {
   fields: [
     {
       name: 'title',
-      label: 'Título',
+      label: 'Title',
       type: 'text',
       required: true,
     },

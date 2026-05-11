@@ -1,27 +1,32 @@
 import React from 'react'
 import type { HomeSectionProcessBlock } from '@/payload-types'
 import { SectionTitle, ProcessTrail } from '@/home/sections'
-import { Orange } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { Sparkle } from '@/home/illustrations'
 
 export const HomeSectionProcessComponent: React.FC<HomeSectionProcessBlock> = ({
+  background,
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   description,
   highlightIndex,
   steps,
 }) => {
+  const isWhite = background === 'white'
+
   return (
-    <section className="relative px-12 py-24 overflow-hidden">
-      <Sparkle size={42} color="#FE9D2B" className="absolute top-14 right-20" />
+    <section
+      className={`relative px-12 py-24 overflow-hidden${isWhite ? ' bg-white' : ''}`}
+    >
+      {!isWhite && <Sparkle size={42} color="#FE9D2B" className="absolute top-14 right-20" />}
       <div className="max-w-7xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-6">
-          <SectionTitle eyebrow={eyebrow} align="center" description={description ?? undefined}>
-            {titleStart}
-            <Orange>{titleAccent}</Orange>
-            {titleEnd}
+        <div className={`mb-6 ${isWhite ? 'max-w-2xl' : 'text-center max-w-2xl mx-auto'}`}>
+          <SectionTitle
+            eyebrow={eyebrow}
+            align={isWhite ? 'left' : 'center'}
+            description={description ?? undefined}
+          >
+            {parseTitle(title)}
           </SectionTitle>
         </div>
         <ProcessTrail

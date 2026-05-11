@@ -3,7 +3,7 @@ import type { Block } from 'payload'
 export const HomeSectionProjects: Block = {
   slug: 'homeSectionProjects',
   interfaceName: 'HomeSectionProjectsBlock',
-  labels: { singular: 'Seção de Projetos', plural: 'Seção de Projetos' },
+  labels: { singular: 'Projects Section', plural: 'Projects Section' },
   fields: [
     {
       name: 'eyebrow',
@@ -13,34 +13,28 @@ export const HomeSectionProjects: Block = {
       defaultValue: 'Trabalhos recentes',
     },
     {
-      name: 'titleStart',
-      label: 'Título — início',
+      name: 'title',
+      label: 'Título',
       type: 'text',
       required: true,
-      defaultValue: 'Projetos que ',
-    },
-    {
-      name: 'titleAccent',
-      label: 'Título — destaque (laranja)',
-      type: 'text',
-      required: true,
-      defaultValue: 'colocamos pra rodar',
+      defaultValue: 'Projetos que *colocamos pra rodar*',
+      admin: { description: 'Use *palavra* para laranja. Use \\n para quebra de linha.' },
     },
     {
       name: 'portfolioLabel',
-      label: 'Botão portfólio — texto',
+      label: 'Portfolio button — text',
       type: 'text',
       defaultValue: 'Ver portfólio completo',
     },
     {
       name: 'portfolioHref',
-      label: 'Botão portfólio — link',
+      label: 'Portfolio button — link',
       type: 'text',
       defaultValue: '#',
     },
     {
       name: 'projects',
-      label: 'Projetos em destaque',
+      label: 'Featured projects',
       type: 'array',
       required: true,
       minRows: 1,
@@ -50,35 +44,35 @@ export const HomeSectionProjects: Block = {
       fields: [
         {
           name: 'tag',
-          label: 'Tag do projeto',
+          label: 'Project tag',
           type: 'text',
           required: true,
         },
         {
           name: 'tagVariant',
-          label: 'Cor da tag',
+          label: 'Tag color',
           type: 'select',
           required: true,
           options: [
-            { label: 'Azul', value: 'blue' },
-            { label: 'Laranja', value: 'orange' },
+            { label: 'Blue', value: 'blue' },
+            { label: 'Orange', value: 'orange' },
           ],
           defaultValue: 'blue',
         },
         {
           name: 'accent',
-          label: 'Cor do card',
+          label: 'Card color',
           type: 'select',
           required: true,
           options: [
-            { label: 'Azul', value: 'blue' },
-            { label: 'Laranja', value: 'orange' },
+            { label: 'Blue', value: 'blue' },
+            { label: 'Orange', value: 'orange' },
           ],
           defaultValue: 'blue',
         },
         {
           name: 'client',
-          label: 'Nome do cliente',
+          label: 'Client name',
           type: 'text',
           required: true,
         },
@@ -90,18 +84,18 @@ export const HomeSectionProjects: Block = {
         },
         {
           name: 'title',
-          label: 'Título do projeto',
+          label: 'Project title',
           type: 'text',
           required: true,
         },
         {
           name: 'result',
-          label: 'Resultado (ex: +38% ticket médio)',
+          label: 'Result (e.g.: +38% avg. ticket)',
           type: 'text',
         },
         {
           name: 'motifType',
-          label: 'Motivo visual do card',
+          label: 'Card visual motif',
           type: 'select',
           required: true,
           options: [
@@ -113,7 +107,7 @@ export const HomeSectionProjects: Block = {
         },
         {
           name: 'href',
-          label: 'Link do projeto',
+          label: 'Project link',
           type: 'text',
           defaultValue: '#',
         },

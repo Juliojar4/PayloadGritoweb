@@ -27,6 +27,8 @@ import { ProjectGridAsymmetricComponent } from '@/blocks/ProjectGridAsymmetric/C
 import { ContactSectionComponent } from '@/blocks/ContactSection/Component'
 import { BlogListingComponent } from '@/blocks/BlogListing/Component'
 import { ArquivoListingComponent } from '@/blocks/ArquivoListing/Component'
+import { LatestPortfoliosComponent } from '@/blocks/LatestPortfolios/Component'
+import { LatestPostsComponent } from '@/blocks/LatestPosts/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -54,6 +56,8 @@ const blockComponents = {
   contactSection: ContactSectionComponent,
   blogListing: BlogListingComponent,
   arquivoListing: ArquivoListingComponent,
+  latestPortfolios: LatestPortfoliosComponent,
+  latestPosts: LatestPostsComponent,
 }
 
 export const RenderBlocks: React.FC<{
@@ -74,7 +78,7 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div className="my-16" key={index}>
+                <div className="" key={index}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>

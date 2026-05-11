@@ -60,24 +60,24 @@ export const Arquivo: CollectionConfig<'arquivo'> = {
     useAsTitle: 'title',
   },
   fields: [
-    // "Projeto" — título principal
+    // "Projeto" — main title
     {
       name: 'title',
-      label: 'Projeto',
+      label: 'Project',
       type: 'text',
       required: true,
     },
 
-    // Sidebar: Ano → Cliente → Tag → Resultado (nessa ordem)
+    // Sidebar: Year → Client → Tag → Result (in this order)
     {
       name: 'year',
-      label: 'Ano',
+      label: 'Year',
       type: 'text',
       admin: { position: 'sidebar' },
     },
     {
       name: 'client',
-      label: 'Cliente',
+      label: 'Client',
       type: 'text',
       admin: { position: 'sidebar' },
     },
@@ -90,12 +90,12 @@ export const Arquivo: CollectionConfig<'arquivo'> = {
     },
     {
       name: 'result',
-      label: 'Resultado',
+      label: 'Result',
       type: 'text',
       admin: { position: 'sidebar' },
     },
 
-    // Conteúdo e SEO em tabs
+    // Content and SEO in tabs
     {
       type: 'tabs',
       tabs: [
@@ -108,10 +108,10 @@ export const Arquivo: CollectionConfig<'arquivo'> = {
             },
             {
               name: 'excerpt',
-              label: 'Resumo',
+              label: 'Excerpt',
               type: 'textarea',
               admin: {
-                description: 'Texto curto exibido na listagem. Máximo recomendado: 160 caracteres.',
+                description: 'Short text shown in the listing. Recommended maximum: 160 characters.',
               },
             },
             {

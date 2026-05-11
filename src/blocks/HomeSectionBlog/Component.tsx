@@ -1,7 +1,8 @@
 import React from 'react'
 import type { HomeSectionBlogBlock } from '@/payload-types'
 import { SectionTitle, PostGrid } from '@/home/sections'
-import { Button, Orange } from '@/home/primitives'
+import { Button } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { PostCard } from '@/home/cards'
 
 const ArrowRight = () => (
@@ -19,9 +20,7 @@ const ArrowRight = () => (
 
 export const HomeSectionBlogComponent: React.FC<HomeSectionBlogBlock> = ({
   eyebrow,
-  titleStart,
-  titleAccent,
-  titleEnd,
+  title,
   blogLabel,
   blogHref,
   posts,
@@ -31,9 +30,7 @@ export const HomeSectionBlogComponent: React.FC<HomeSectionBlogBlock> = ({
       <div className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-9">
           <SectionTitle eyebrow={eyebrow} align="left">
-            {titleStart}
-            <Orange>{titleAccent}</Orange>
-            {titleEnd}
+            {parseTitle(title)}
           </SectionTitle>
           {blogLabel && (
             <Button variant="ghost" href={blogHref ?? '#'} icon={<ArrowRight />}>

@@ -5,8 +5,8 @@ import configPromise from '@payload-config'
 
 import type { ProjectGridAsymmetricBlock, Portfolio, Media } from '@/payload-types'
 import { SectionTitle, ProjectGrid } from '@/home/sections'
-import { Orange } from '@/home/primitives'
 import { Button } from '@/home/primitives'
+import { parseTitle } from '@/utilities/parseTitle'
 import { ProjectCard } from '@/home/cards'
 import { Tag } from '@/home/primitives'
 
@@ -44,8 +44,7 @@ function PortfolioImage({ image, title }: { image: Media; title: string }) {
 
 export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock> = async ({
   eyebrow,
-  titleStart,
-  titleAccent,
+  title,
   portfolioLabel,
   portfolioHref,
   limit = 5,
@@ -55,6 +54,18 @@ export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock
 
   let portfolios: Portfolio[] = []
 
+  const portfolioSelect = {
+    title: true as const,
+    slug: true as const,
+    client: true as const,
+    image: true as const,
+    categories: true as const,
+    tagVariant: true as const,
+    accent: true as const,
+    year: true as const,
+    result: true as const,
+  }
+
   if (selectedProjects && selectedProjects.length > 0) {
     const ids = selectedProjects.map((p) => (typeof p === 'object' ? p.id : p))
     const result = await payload.find({
@@ -62,6 +73,7 @@ export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock
       where: { id: { in: ids } },
       depth: 1,
       limit: ids.length,
+      select: portfolioSelect,
     })
     portfolios = result.docs as Portfolio[]
     // preserve selected order
@@ -72,6 +84,7 @@ export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock
       sort: '-publishedAt',
       depth: 1,
       limit: limit ?? 5,
+      select: portfolioSelect,
     })
     portfolios = result.docs as Portfolio[]
   }
@@ -81,8 +94,7 @@ export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock
       <div className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-9">
           <SectionTitle eyebrow={eyebrow ?? undefined} align="left">
-            {titleStart}
-            <Orange>{titleAccent}</Orange>
+            {parseTitle(title)}
           </SectionTitle>
           {portfolioLabel && (
             <Button variant="ghost" href={portfolioHref ?? '/portfolio'} icon={<ArrowRight />}>
@@ -99,10 +111,7 @@ export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock
             const firstCategory = portfolio.categories?.[0]
             const categoryTag =
               typeof firstCategory === 'object' ? firstCategory.title : undefined
-            const portfolioTag = typeof portfolio.tag === 'object' && portfolio.tag !== null
-              ? portfolio.tag.title
-              : undefined
-            const tag = categoryTag ?? portfolioTag ?? undefined
+            const tag = categoryTag ?? undefined
 
             return (
               <div key={portfolio.id} className={spanClasses[span]}>

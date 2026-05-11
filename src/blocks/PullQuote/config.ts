@@ -12,18 +12,18 @@ export const PullQuote: Block = {
     },
     {
       name: 'quote',
-      label: 'Citação',
+      label: 'Quote',
       type: 'textarea',
       required: true,
     },
     {
       name: 'author',
-      label: 'Nome do autor',
+      label: 'Author name',
       type: 'text',
     },
     {
       name: 'role',
-      label: 'Cargo / Empresa',
+      label: 'Role / Company',
       type: 'text',
     },
   ],

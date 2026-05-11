@@ -24,6 +24,7 @@ import { ChecklistGridComponent } from '@/blocks/ChecklistGrid/Component'
 import { FaqBlockComponent } from '@/blocks/FaqBlock/Component'
 import { PullQuoteComponent } from '@/blocks/PullQuote/Component'
 import { ProjectGridAsymmetricComponent } from '@/blocks/ProjectGridAsymmetric/Component'
+import { ContactSectionComponent } from '@/blocks/ContactSection/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -48,6 +49,7 @@ const blockComponents = {
   faqBlock: FaqBlockComponent,
   pullQuote: PullQuoteComponent,
   projectGridAsymmetric: ProjectGridAsymmetricComponent,
+  contactSection: ContactSectionComponent,
 }
 
 export const RenderBlocks: React.FC<{

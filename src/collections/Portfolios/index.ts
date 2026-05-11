@@ -18,6 +18,7 @@ export const Portfolios: CollectionConfig<'portfolios'> = {
     slug: true,
     client: true,
     image: true,
+    categories: true,
     tag: true,
     tagVariant: true,
     accent: true,

@@ -75,8 +75,8 @@ export function ServiceCard({
       {bullets && bullets.length > 0 && (
         <ul className="m-0 p-0 list-none flex flex-col gap-1.5 mt-1">
           {bullets.map((bullet) => (
-            <li key={bullet} className={`text-sm flex gap-2 ${serviceAccentText[variant]}`}>
-              <span aria-hidden="true" className="font-bold shrink-0">✓</span>
+            <li key={bullet} className={`text-sm flex gap-2`}>
+              <span aria-hidden="true" className={`font-bold shrink-0 ${serviceAccentText[variant]}`}>✓</span>
               <span>{bullet}</span>
             </li>
           ))}
@@ -165,14 +165,14 @@ export function ProjectCard({
           </p>
         )}
         <h3 className="mt-1.5 text-[22px] font-bold m-0">{title}</h3>
-        {result && (
-          <div className="mt-4 pt-3.5 border-t border-dashed border-line flex items-center justify-between">
+        <div className="mt-4 pt-3.5 border-t border-dashed border-line flex items-center justify-between">
+          {result && (
             <span className="font-mono text-[13px] text-orange font-bold">{result}</span>
-            <span aria-hidden="true" className="text-blue text-[22px]">
-              →
-            </span>
-          </div>
-        )}
+          )}
+          <span className="ml-auto font-display font-medium text-sm text-blue inline-flex items-center gap-1.5">
+            Saiba mais <span aria-hidden="true">→</span>
+          </span>
+        </div>
       </div>
     </>
   )

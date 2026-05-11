@@ -96,6 +96,10 @@ export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock
             const span = spanFor(index)
             const image = portfolio.image as Media | null
             const href = `/portfolio/${portfolio.slug}`
+            const firstCategory = portfolio.categories?.[0]
+            const categoryTag =
+              typeof firstCategory === 'object' ? firstCategory.title : undefined
+            const tag = categoryTag ?? portfolio.tag ?? undefined
 
             return (
               <div key={portfolio.id} className={spanClasses[span]}>
@@ -103,14 +107,14 @@ export const ProjectGridAsymmetricComponent: React.FC<ProjectGridAsymmetricBlock
                   client={portfolio.client}
                   title={portfolio.title}
                   result={portfolio.result ?? undefined}
-                  tag={portfolio.tag ?? undefined}
+                  tag={tag}
                   tagVariant={(portfolio.tagVariant as 'blue' | 'orange') ?? 'blue'}
                   accent={(portfolio.accent as 'blue' | 'orange') ?? 'blue'}
                   year={portfolio.year ?? undefined}
                   href={href}
                   motif={
                     image ? (
-                      <div className="relative w-full h-full absolute inset-0">
+                      <div className="absolute inset-0">
                         <PortfolioImage image={image} title={portfolio.title} />
                       </div>
                     ) : undefined

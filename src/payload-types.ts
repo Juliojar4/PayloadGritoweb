@@ -228,6 +228,7 @@ export interface Page {
     | FaqBlockBlock
     | PullQuoteBlock
     | ProjectGridAsymmetricBlock
+    | ContactSectionBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1193,6 +1194,30 @@ export interface Portfolio {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactSectionBlock".
+ */
+export interface ContactSectionBlock {
+  eyebrow?: string | null;
+  heading?: string | null;
+  sidebarEyebrow?: string | null;
+  successTitle?: string | null;
+  successMessage?: string | null;
+  channels?:
+    | {
+        icon: 'email' | 'phone' | 'whatsapp' | 'instagram' | 'linkedin' | 'location';
+        label: string;
+        value: string;
+        hint?: string | null;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1520,6 +1545,7 @@ export interface PagesSelect<T extends boolean = true> {
         faqBlock?: T | FaqBlockBlockSelect<T>;
         pullQuote?: T | PullQuoteBlockSelect<T>;
         projectGridAsymmetric?: T | ProjectGridAsymmetricBlockSelect<T>;
+        contactSection?: T | ContactSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1952,6 +1978,29 @@ export interface ProjectGridAsymmetricBlockSelect<T extends boolean = true> {
   portfolioHref?: T;
   limit?: T;
   selectedProjects?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactSectionBlock_select".
+ */
+export interface ContactSectionBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  sidebarEyebrow?: T;
+  successTitle?: T;
+  successMessage?: T;
+  channels?:
+    | T
+    | {
+        icon?: T;
+        label?: T;
+        value?: T;
+        hint?: T;
+        href?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

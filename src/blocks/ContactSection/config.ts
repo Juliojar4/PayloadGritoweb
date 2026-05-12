@@ -4,6 +4,8 @@ export const ContactSection: Block = {
   slug: 'contactSection',
   interfaceName: 'ContactSectionBlock',
   labels: { singular: 'Contact Section (Form)', plural: 'Contact Sections (Form)' },
+  imageURL: '/images/blocks/contactSection.png',
+  imageAltText: 'Contact Section (Form)',
   fields: [
     {
       name: 'eyebrow',

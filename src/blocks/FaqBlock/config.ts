@@ -4,6 +4,8 @@ export const FaqBlock: Block = {
   slug: 'faqBlock',
   interfaceName: 'FaqBlockBlock',
   labels: { singular: 'FAQ', plural: 'FAQs' },
+  imageURL: '/images/blocks/FAQ.png',
+  imageAltText: 'FAQ',
   fields: [
     {
       name: 'eyebrow',

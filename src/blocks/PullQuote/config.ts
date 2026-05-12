@@ -4,6 +4,8 @@ export const PullQuote: Block = {
   slug: 'pullQuote',
   interfaceName: 'PullQuoteBlock',
   labels: { singular: 'Pull Quote', plural: 'Pull Quotes' },
+  imageURL: '/images/blocks/pullQuote.png',
+  imageAltText: 'Pull Quote',
   fields: [
     {
       name: 'eyebrow',

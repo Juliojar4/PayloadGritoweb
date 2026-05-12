@@ -2,11 +2,6 @@ import React, { Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
 
-import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
-import { CallToActionBlock } from '@/blocks/CallToAction/Component'
-import { ContentBlock } from '@/blocks/Content/Component'
-import { FormBlock } from '@/blocks/Form/Component'
-import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { HeroBlock } from '@/blocks/Hero/Component'
 import { ThreeCardsBlock } from '@/blocks/ThreeCards/Component'
 import { SectionHeroComponent } from '@/blocks/SectionHero/Component'
@@ -32,12 +27,7 @@ import { LatestPostsComponent } from '@/blocks/LatestPosts/Component'
 import { PortfolioListingComponent } from '@/blocks/PortfolioListing/Component'
 
 const blockComponents = {
-  archive: ArchiveBlock,
-  content: ContentBlock,
-  cta: CallToActionBlock,
   homeHero: HeroBlock,
-  formBlock: FormBlock,
-  mediaBlock: MediaBlock,
   threeCards: ThreeCardsBlock,
   homeSectionHero: SectionHeroComponent,
   homeSectionLogoCloud: SectionLogoCloudComponent,

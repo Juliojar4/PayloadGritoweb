@@ -139,7 +139,8 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
         },
       },
     },
-    layout: [
+    layout: [] as any,
+    _unused_layout: [
       {
         blockName: 'Content Block',
         blockType: 'content',
@@ -665,6 +666,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
         },
       },
     ],
+    _end_unused: undefined,
     meta: {
       description: 'An open-source website built with Payload and Next.js.',
       image: heroImage.id,

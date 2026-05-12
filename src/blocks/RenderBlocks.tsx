@@ -2,8 +2,6 @@ import React, { Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
 
-import { HeroBlock } from '@/blocks/Hero/Component'
-import { ThreeCardsBlock } from '@/blocks/ThreeCards/Component'
 import { SectionHeroComponent } from '@/blocks/SectionHero/Component'
 import { SectionLogoCloudComponent } from '@/blocks/SectionLogoCloud/Component'
 import { SectionServicesComponent } from '@/blocks/SectionServices/Component'
@@ -27,8 +25,6 @@ import { LatestPostsComponent } from '@/blocks/LatestPosts/Component'
 import { PortfolioListingComponent } from '@/blocks/PortfolioListing/Component'
 
 const blockComponents = {
-  homeHero: HeroBlock,
-  threeCards: ThreeCardsBlock,
   homeSectionHero: SectionHeroComponent,
   homeSectionLogoCloud: SectionLogoCloudComponent,
   homeSectionServices: SectionServicesComponent,

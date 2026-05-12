@@ -223,8 +223,6 @@ export interface Page {
     heroImage?: (number | null) | Media;
   };
   layout: (
-    | Hero
-    | ThreeCardsBlock
     | SectionHeroBlock
     | SectionLogoCloudBlock
     | SectionServicesBlock
@@ -482,40 +480,6 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero".
- */
-export interface Hero {
-  title: string;
-  'hero-image': number | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'homeHero';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ThreeCardsBlock".
- */
-export interface ThreeCardsBlock {
-  sectionTitle: string;
-  sectionTitleHighlight: string;
-  ctaLabel?: string | null;
-  ctaUrl?: string | null;
-  cards?:
-    | {
-        borderColor: 'primary' | 'secondary';
-        image: number | Media;
-        title: string;
-        titleHighlight?: string | null;
-        description: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'threeCards';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1604,8 +1568,6 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        homeHero?: T | HeroSelect<T>;
-        threeCards?: T | ThreeCardsBlockSelect<T>;
         homeSectionHero?: T | SectionHeroBlockSelect<T>;
         homeSectionLogoCloud?: T | SectionLogoCloudBlockSelect<T>;
         homeSectionServices?: T | SectionServicesBlockSelect<T>;
@@ -1641,38 +1603,6 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_select".
- */
-export interface HeroSelect<T extends boolean = true> {
-  title?: T;
-  'hero-image'?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ThreeCardsBlock_select".
- */
-export interface ThreeCardsBlockSelect<T extends boolean = true> {
-  sectionTitle?: T;
-  sectionTitleHighlight?: T;
-  ctaLabel?: T;
-  ctaUrl?: T;
-  cards?:
-    | T
-    | {
-        borderColor?: T;
-        image?: T;
-        title?: T;
-        titleHighlight?: T;
-        description?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

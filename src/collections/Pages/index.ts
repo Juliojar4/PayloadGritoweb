@@ -2,8 +2,6 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Hero } from '../../blocks/Hero/config'
-import { ThreeCards } from '../../blocks/ThreeCards/config'
 import { SectionHero } from '../../blocks/SectionHero/config'
 import { SectionLogoCloud } from '../../blocks/SectionLogoCloud/config'
 import { SectionServices } from '../../blocks/SectionServices/config'
@@ -91,8 +89,6 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'layout',
               type: 'blocks',
               blocks: [
-                Hero,
-                ThreeCards,
                 SectionHero,
                 SectionLogoCloud,
                 SectionServices,

@@ -4,6 +4,8 @@ export const BlogListing: Block = {
   slug: 'blogListing',
   interfaceName: 'BlogListingBlock',
   labels: { singular: 'Listagem de Posts', plural: 'Listagens de Posts' },
+  imageURL: '/images/blocks/listagemDePost.png',
+  imageAltText: 'Listagem de Posts',
   fields: [
     {
       name: 'featuredPost',

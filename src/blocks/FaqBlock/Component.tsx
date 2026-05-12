@@ -1,6 +1,6 @@
 import React from 'react'
 import type { FaqBlockBlock } from '@/payload-types'
-import { SectionTitle } from '@/home/sections'
+import { SectionTitle } from '@/components/sections'
 import { parseTitle } from '@/utilities/parseTitle'
 import { FaqAccordion } from './Component.client'
 

@@ -7,19 +7,19 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
-import { HomeHeroBlock } from '@/blocks/HomeHero/Component'
+import { HeroBlock } from '@/blocks/Hero/Component'
 import { ThreeCardsBlock } from '@/blocks/ThreeCards/Component'
-import { HomeSectionHeroComponent } from '@/blocks/HomeSectionHero/Component'
-import { HomeSectionLogoCloudComponent } from '@/blocks/HomeSectionLogoCloud/Component'
-import { HomeSectionServicesComponent } from '@/blocks/HomeSectionServices/Component'
-import { HomeSectionAboutComponent } from '@/blocks/HomeSectionAbout/Component'
-import { HomeSectionProjectsComponent } from '@/blocks/HomeSectionProjects/Component'
-import { HomeSectionProcessComponent } from '@/blocks/HomeSectionProcess/Component'
-import { HomeSectionStatsComponent } from '@/blocks/HomeSectionStats/Component'
-import { HomeSectionTestimonialsComponent } from '@/blocks/HomeSectionTestimonials/Component'
-import { HomeSectionBlogComponent } from '@/blocks/HomeSectionBlog/Component'
-import { HomeSectionCtaComponent } from '@/blocks/HomeSectionCta/Component'
-import { HomeSectionContactComponent } from '@/blocks/HomeSectionContact/Component'
+import { SectionHeroComponent } from '@/blocks/SectionHero/Component'
+import { SectionLogoCloudComponent } from '@/blocks/SectionLogoCloud/Component'
+import { SectionServicesComponent } from '@/blocks/SectionServices/Component'
+import { SectionAboutComponent } from '@/blocks/SectionAbout/Component'
+import { SectionProjectsComponent } from '@/blocks/SectionProjects/Component'
+import { SectionProcessComponent } from '@/blocks/SectionProcess/Component'
+import { SectionStatsComponent } from '@/blocks/SectionStats/Component'
+import { SectionTestimonialsComponent } from '@/blocks/SectionTestimonials/Component'
+import { SectionBlogComponent } from '@/blocks/SectionBlog/Component'
+import { SectionCtaComponent } from '@/blocks/SectionCta/Component'
+import { SectionContactComponent } from '@/blocks/SectionContact/Component'
 import { ChecklistGridComponent } from '@/blocks/ChecklistGrid/Component'
 import { FaqBlockComponent } from '@/blocks/FaqBlock/Component'
 import { PullQuoteComponent } from '@/blocks/PullQuote/Component'
@@ -29,26 +29,27 @@ import { BlogListingComponent } from '@/blocks/BlogListing/Component'
 import { ArquivoListingComponent } from '@/blocks/ArquivoListing/Component'
 import { LatestPortfoliosComponent } from '@/blocks/LatestPortfolios/Component'
 import { LatestPostsComponent } from '@/blocks/LatestPosts/Component'
+import { PortfolioListingComponent } from '@/blocks/PortfolioListing/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
-  homeHero: HomeHeroBlock,
+  homeHero: HeroBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   threeCards: ThreeCardsBlock,
-  homeSectionHero: HomeSectionHeroComponent,
-  homeSectionLogoCloud: HomeSectionLogoCloudComponent,
-  homeSectionServices: HomeSectionServicesComponent,
-  homeSectionAbout: HomeSectionAboutComponent,
-  homeSectionProjects: HomeSectionProjectsComponent,
-  homeSectionProcess: HomeSectionProcessComponent,
-  homeSectionStats: HomeSectionStatsComponent,
-  homeSectionTestimonials: HomeSectionTestimonialsComponent,
-  homeSectionBlog: HomeSectionBlogComponent,
-  homeSectionCta: HomeSectionCtaComponent,
-  homeSectionContact: HomeSectionContactComponent,
+  homeSectionHero: SectionHeroComponent,
+  homeSectionLogoCloud: SectionLogoCloudComponent,
+  homeSectionServices: SectionServicesComponent,
+  homeSectionAbout: SectionAboutComponent,
+  homeSectionProjects: SectionProjectsComponent,
+  homeSectionProcess: SectionProcessComponent,
+  homeSectionStats: SectionStatsComponent,
+  homeSectionTestimonials: SectionTestimonialsComponent,
+  homeSectionBlog: SectionBlogComponent,
+  homeSectionCta: SectionCtaComponent,
+  homeSectionContact: SectionContactComponent,
   checklistGrid: ChecklistGridComponent,
   faqBlock: FaqBlockComponent,
   pullQuote: PullQuoteComponent,
@@ -58,6 +59,7 @@ const blockComponents = {
   arquivoListing: ArquivoListingComponent,
   latestPortfolios: LatestPortfoliosComponent,
   latestPosts: LatestPostsComponent,
+  portfolioListing: PortfolioListingComponent,
 }
 
 export const RenderBlocks: React.FC<{

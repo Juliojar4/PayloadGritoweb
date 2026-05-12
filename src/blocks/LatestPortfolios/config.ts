@@ -4,6 +4,8 @@ export const LatestPortfolios: Block = {
   slug: 'latestPortfolios',
   interfaceName: 'LatestPortfoliosBlock',
   labels: { singular: 'Últimos Portfólios', plural: 'Últimos Portfólios' },
+  imageURL: '/images/blocks/ultimosPortifolios.png',
+  imageAltText: 'Últimos Portfólios',
   fields: [
     {
       name: 'eyebrow',

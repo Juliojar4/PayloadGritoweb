@@ -4,6 +4,8 @@ export const ChecklistGrid: Block = {
   slug: 'checklistGrid',
   interfaceName: 'ChecklistGridBlock',
   labels: { singular: 'Checklist Grid', plural: 'Checklist Grids' },
+  imageURL: '/images/blocks/checklist.png',
+  imageAltText: 'Checklist Grid',
   fields: [
     {
       name: 'eyebrow',

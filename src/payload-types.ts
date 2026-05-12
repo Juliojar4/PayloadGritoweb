@@ -116,7 +116,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
   globals: {
@@ -166,10 +166,10 @@ export interface UserAuthOperations {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    type: 'none' | 'defaultHero' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
       root: {
         type: string;
@@ -193,11 +193,11 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: string | Page;
+                  value: number | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: string | Post;
+                  value: number | Post;
                 } | null);
             url?: string | null;
             label: string;
@@ -209,7 +209,18 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
-    media?: (string | null) | Media;
+    media?: (number | null) | Media;
+    eyebrow?: string | null;
+    /**
+     * Use *palavra* para laranja. Use \n para quebra de linha.
+     */
+    heroTitle?: string | null;
+    heroDescription?: string | null;
+    cta1Label?: string | null;
+    cta1Href?: string | null;
+    cta2Label?: string | null;
+    cta2Href?: string | null;
+    heroImage?: (number | null) | Media;
   };
   layout: (
     | CallToActionBlock
@@ -217,19 +228,19 @@ export interface Page {
     | MediaBlock
     | ArchiveBlock
     | FormBlock
-    | HomeHero
+    | Hero
     | ThreeCardsBlock
-    | HomeSectionHeroBlock
-    | HomeSectionLogoCloudBlock
-    | HomeSectionServicesBlock
-    | HomeSectionAboutBlock
-    | HomeSectionProjectsBlock
-    | HomeSectionProcessBlock
-    | HomeSectionStatsBlock
-    | HomeSectionTestimonialsBlock
-    | HomeSectionBlogBlock
-    | HomeSectionCtaBlock
-    | HomeSectionContactBlock
+    | SectionHeroBlock
+    | SectionLogoCloudBlock
+    | SectionServicesBlock
+    | SectionAboutBlock
+    | SectionProjectsBlock
+    | SectionProcessBlock
+    | SectionStatsBlock
+    | SectionTestimonialsBlock
+    | SectionBlogBlock
+    | SectionCtaBlock
+    | SectionContactBlock
     | ChecklistGridBlock
     | FaqBlockBlock
     | PullQuoteBlock
@@ -239,13 +250,14 @@ export interface Page {
     | ArquivoListingBlock
     | LatestPortfoliosBlock
     | LatestPostsBlock
+    | PortfolioListingBlock
   )[];
   meta?: {
     title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
     description?: string | null;
   };
   publishedAt?: string | null;
@@ -263,9 +275,9 @@ export interface Page {
  * via the `definition` "posts".
  */
 export interface Post {
-  id: string;
+  id: number;
   title: string;
-  heroImage?: (string | null) | Media;
+  heroImage?: (number | null) | Media;
   /**
    * Short text shown in the posts listing. Recommended maximum: 160 characters.
    */
@@ -285,22 +297,22 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  relatedPosts?: (string | Post)[] | null;
-  tags?: (string | Tag)[] | null;
+  relatedPosts?: (number | Post)[] | null;
+  tags?: (number | Tag)[] | null;
   meta?: {
     title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
     description?: string | null;
   };
   /**
    * Imagem exibida nos cards de listagem de posts.
    */
-  featuredImage?: (string | null) | Media;
+  featuredImage?: (number | null) | Media;
   publishedAt?: string | null;
-  authors?: (string | User)[] | null;
+  authors?: (number | User)[] | null;
   populatedAuthors?:
     | {
         id?: string | null;
@@ -321,7 +333,7 @@ export interface Post {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt?: string | null;
   caption?: {
     root: {
@@ -338,7 +350,7 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
-  folder?: (string | null) | FolderInterface;
+  folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -414,18 +426,18 @@ export interface Media {
  * via the `definition` "payload-folders".
  */
 export interface FolderInterface {
-  id: string;
+  id: number;
   name: string;
-  folder?: (string | null) | FolderInterface;
+  folder?: (number | null) | FolderInterface;
   documentsAndFolders?: {
     docs?: (
       | {
           relationTo?: 'payload-folders';
-          value: string | FolderInterface;
+          value: number | FolderInterface;
         }
       | {
           relationTo?: 'media';
-          value: string | Media;
+          value: number | Media;
         }
     )[];
     hasNextPage?: boolean;
@@ -440,7 +452,7 @@ export interface FolderInterface {
  * via the `definition` "tags".
  */
 export interface Tag {
-  id: string;
+  id: number;
   title: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -455,7 +467,7 @@ export interface Tag {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   name?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -504,11 +516,11 @@ export interface CallToActionBlock {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: string | Page;
+                value: number | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: string | Post;
+                value: number | Post;
               } | null);
           url?: string | null;
           label: string;
@@ -554,11 +566,11 @@ export interface ContentBlock {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: string | Page;
+                value: number | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: string | Post;
+                value: number | Post;
               } | null);
           url?: string | null;
           label: string;
@@ -579,7 +591,7 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
-  media: string | Media;
+  media: number | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -606,12 +618,12 @@ export interface ArchiveBlock {
   } | null;
   populateBy?: ('collection' | 'selection') | null;
   relationTo?: 'posts' | null;
-  categories?: (string | Category)[] | null;
+  categories?: (number | Category)[] | null;
   limit?: number | null;
   selectedDocs?:
     | {
         relationTo: 'posts';
-        value: string | Post;
+        value: number | Post;
       }[]
     | null;
   id?: string | null;
@@ -623,17 +635,17 @@ export interface ArchiveBlock {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: string;
+  id: number;
   title: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
   slug: string;
-  parent?: (string | null) | Category;
+  parent?: (number | null) | Category;
   breadcrumbs?:
     | {
-        doc?: (string | null) | Category;
+        doc?: (number | null) | Category;
         url?: string | null;
         label?: string | null;
         id?: string | null;
@@ -647,7 +659,7 @@ export interface Category {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
-  form: string | Form;
+  form: number | Form;
   enableIntro?: boolean | null;
   introContent?: {
     root: {
@@ -673,7 +685,7 @@ export interface FormBlock {
  * via the `definition` "forms".
  */
 export interface Form {
-  id: string;
+  id: number;
   title: string;
   fields?:
     | (
@@ -844,11 +856,11 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeHero".
+ * via the `definition` "Hero".
  */
-export interface HomeHero {
+export interface Hero {
   title: string;
-  'hero-image': string | Media;
+  'hero-image': number | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'homeHero';
@@ -865,7 +877,7 @@ export interface ThreeCardsBlock {
   cards?:
     | {
         borderColor: 'primary' | 'secondary';
-        image: string | Media;
+        image: number | Media;
         title: string;
         titleHighlight?: string | null;
         description: string;
@@ -878,9 +890,9 @@ export interface ThreeCardsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionHeroBlock".
+ * via the `definition` "SectionHeroBlock".
  */
-export interface HomeSectionHeroBlock {
+export interface SectionHeroBlock {
   eyebrow?: string | null;
   /**
    * Use *palavra* para laranja. Use \n para quebra de linha.
@@ -891,16 +903,16 @@ export interface HomeSectionHeroBlock {
   cta1Href?: string | null;
   cta2Label?: string | null;
   cta2Href?: string | null;
-  image: string | Media;
+  image: number | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'homeSectionHero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionLogoCloudBlock".
+ * via the `definition` "SectionLogoCloudBlock".
  */
-export interface HomeSectionLogoCloudBlock {
+export interface SectionLogoCloudBlock {
   eyebrow: string;
   /**
    * Use *palavra* para laranja.
@@ -908,7 +920,6 @@ export interface HomeSectionLogoCloudBlock {
   title: string;
   description?: string | null;
   partners: {
-    name: string;
     glyph:
       | 'circle'
       | 'triangle'
@@ -930,9 +941,9 @@ export interface HomeSectionLogoCloudBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionServicesBlock".
+ * via the `definition` "SectionServicesBlock".
  */
-export interface HomeSectionServicesBlock {
+export interface SectionServicesBlock {
   eyebrow?: string | null;
   /**
    * Use *palavra* para laranja. Use \n para quebra de linha.
@@ -963,9 +974,9 @@ export interface HomeSectionServicesBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionAboutBlock".
+ * via the `definition` "SectionAboutBlock".
  */
-export interface HomeSectionAboutBlock {
+export interface SectionAboutBlock {
   eyebrow: string;
   /**
    * Use *palavra* para laranja. Use \n para quebra de linha.
@@ -979,16 +990,16 @@ export interface HomeSectionAboutBlock {
     description: string;
     id?: string | null;
   }[];
-  image: string | Media;
+  image: number | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'homeSectionAbout';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionProjectsBlock".
+ * via the `definition` "SectionProjectsBlock".
  */
-export interface HomeSectionProjectsBlock {
+export interface SectionProjectsBlock {
   eyebrow: string;
   /**
    * Use *palavra* para laranja. Use \n para quebra de linha.
@@ -1014,9 +1025,9 @@ export interface HomeSectionProjectsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionProcessBlock".
+ * via the `definition` "SectionProcessBlock".
  */
-export interface HomeSectionProcessBlock {
+export interface SectionProcessBlock {
   background?: ('dark' | 'white') | null;
   eyebrow: string;
   /**
@@ -1039,9 +1050,9 @@ export interface HomeSectionProcessBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionStatsBlock".
+ * via the `definition` "SectionStatsBlock".
  */
-export interface HomeSectionStatsBlock {
+export interface SectionStatsBlock {
   showDecoration?: boolean | null;
   stats: {
     value: string;
@@ -1054,9 +1065,9 @@ export interface HomeSectionStatsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionTestimonialsBlock".
+ * via the `definition` "SectionTestimonialsBlock".
  */
-export interface HomeSectionTestimonialsBlock {
+export interface SectionTestimonialsBlock {
   eyebrow: string;
   /**
    * Use *palavra* para laranja. Use \n para quebra de linha.
@@ -1079,9 +1090,9 @@ export interface HomeSectionTestimonialsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionBlogBlock".
+ * via the `definition` "SectionBlogBlock".
  */
-export interface HomeSectionBlogBlock {
+export interface SectionBlogBlock {
   eyebrow: string;
   /**
    * Use *palavra* para laranja. Use \n para quebra de linha.
@@ -1104,9 +1115,9 @@ export interface HomeSectionBlogBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionCtaBlock".
+ * via the `definition` "SectionCtaBlock".
  */
-export interface HomeSectionCtaBlock {
+export interface SectionCtaBlock {
   variant: 'blue' | 'orange' | 'white';
   eyebrow?: string | null;
   titleMain: string;
@@ -1119,16 +1130,16 @@ export interface HomeSectionCtaBlock {
   cta2Label?: string | null;
   cta2Href?: string | null;
   cta2Variant?: ('primary' | 'blue' | 'ghost' | 'white') | null;
-  image?: (string | null) | Media;
+  image?: (number | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'homeSectionCta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionContactBlock".
+ * via the `definition` "SectionContactBlock".
  */
-export interface HomeSectionContactBlock {
+export interface SectionContactBlock {
   email: string;
   emailHref: string;
   phone: string;
@@ -1208,7 +1219,7 @@ export interface ProjectGridAsymmetricBlock {
   /**
    * Leave empty to automatically show the most recent projects.
    */
-  selectedProjects?: (string | Portfolio)[] | null;
+  selectedProjects?: (number | Portfolio)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'projectGridAsymmetric';
@@ -1218,13 +1229,13 @@ export interface ProjectGridAsymmetricBlock {
  * via the `definition` "portfolios".
  */
 export interface Portfolio {
-  id: string;
+  id: number;
   title: string;
   client: string;
   summary?: string | null;
-  image: string | Media;
-  categories?: (string | Category)[] | null;
-  tag?: (string | null) | PortfolioTag;
+  image: number | Media;
+  categories?: (number | Category)[] | null;
+  tag?: (number | null) | PortfolioTag;
   tagVariant?: ('blue' | 'orange') | null;
   accent?: ('blue' | 'orange') | null;
   year?: string | null;
@@ -1244,7 +1255,7 @@ export interface Portfolio {
  * via the `definition` "portfolio-tags".
  */
 export interface PortfolioTag {
-  id: string;
+  id: number;
   title: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -1286,7 +1297,7 @@ export interface BlogListingBlock {
   /**
    * Appears as a banner above the listing. Leave empty to hide.
    */
-  featuredPost?: (string | null) | Post;
+  featuredPost?: (number | null) | Post;
   eyebrow?: string | null;
   /**
    * Use *palavra* para laranja. Use \n para quebra de linha.
@@ -1350,16 +1361,32 @@ export interface LatestPostsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PortfolioListingBlock".
+ */
+export interface PortfolioListingBlock {
+  eyebrow?: string | null;
+  /**
+   * Use *palavra* para laranja. Use \n para quebra de linha.
+   */
+  title?: string | null;
+  showFilters?: boolean | null;
+  showViewToggle?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'portfolioListing';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "arquivo".
  */
 export interface Arquivo {
-  id: string;
+  id: number;
   title: string;
   year?: string | null;
   client?: string | null;
-  tag?: (string | null) | ArquivoTag;
+  tag?: (number | null) | ArquivoTag;
   result?: string | null;
-  heroImage?: (string | null) | Media;
+  heroImage?: (number | null) | Media;
   /**
    * Short text shown in the listing. Recommended maximum: 160 characters.
    */
@@ -1384,11 +1411,11 @@ export interface Arquivo {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
     description?: string | null;
   };
   publishedAt?: string | null;
-  authors?: (string | User)[] | null;
+  authors?: (number | User)[] | null;
   populatedAuthors?:
     | {
         id?: string | null;
@@ -1409,7 +1436,7 @@ export interface Arquivo {
  * via the `definition` "arquivo-tags".
  */
 export interface ArquivoTag {
-  id: string;
+  id: number;
   title: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -1424,7 +1451,7 @@ export interface ArquivoTag {
  * via the `definition` "redirects".
  */
 export interface Redirect {
-  id: string;
+  id: number;
   /**
    * You will need to rebuild the website when changing this field.
    */
@@ -1434,11 +1461,11 @@ export interface Redirect {
     reference?:
       | ({
           relationTo: 'pages';
-          value: string | Page;
+          value: number | Page;
         } | null)
       | ({
           relationTo: 'posts';
-          value: string | Post;
+          value: number | Post;
         } | null);
     url?: string | null;
   };
@@ -1450,8 +1477,8 @@ export interface Redirect {
  * via the `definition` "form-submissions".
  */
 export interface FormSubmission {
-  id: string;
-  form: string | Form;
+  id: number;
+  form: number | Form;
   submissionData?:
     | {
         field: string;
@@ -1469,18 +1496,18 @@ export interface FormSubmission {
  * via the `definition` "search".
  */
 export interface Search {
-  id: string;
+  id: number;
   title?: string | null;
   priority?: number | null;
   doc: {
     relationTo: 'posts';
-    value: string | Post;
+    value: number | Post;
   };
   slug?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   categories?:
     | {
@@ -1498,7 +1525,7 @@ export interface Search {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -1515,7 +1542,7 @@ export interface PayloadKv {
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
-  id: string;
+  id: number;
   /**
    * Input data provided to the job
    */
@@ -1607,72 +1634,72 @@ export interface PayloadJob {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'pages';
-        value: string | Page;
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'posts';
-        value: string | Post;
+        value: number | Post;
       } | null)
     | ({
         relationTo: 'arquivo';
-        value: string | Arquivo;
+        value: number | Arquivo;
       } | null)
     | ({
         relationTo: 'portfolios';
-        value: string | Portfolio;
+        value: number | Portfolio;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'categories';
-        value: string | Category;
+        value: number | Category;
       } | null)
     | ({
         relationTo: 'tags';
-        value: string | Tag;
+        value: number | Tag;
       } | null)
     | ({
         relationTo: 'portfolio-tags';
-        value: string | PortfolioTag;
+        value: number | PortfolioTag;
       } | null)
     | ({
         relationTo: 'arquivo-tags';
-        value: string | ArquivoTag;
+        value: number | ArquivoTag;
       } | null)
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'redirects';
-        value: string | Redirect;
+        value: number | Redirect;
       } | null)
     | ({
         relationTo: 'forms';
-        value: string | Form;
+        value: number | Form;
       } | null)
     | ({
         relationTo: 'form-submissions';
-        value: string | FormSubmission;
+        value: number | FormSubmission;
       } | null)
     | ({
         relationTo: 'search';
-        value: string | Search;
+        value: number | Search;
       } | null)
     | ({
         relationTo: 'payload-folders';
-        value: string | FolderInterface;
+        value: number | FolderInterface;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -1682,10 +1709,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -1705,7 +1732,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -1738,6 +1765,14 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        eyebrow?: T;
+        heroTitle?: T;
+        heroDescription?: T;
+        cta1Label?: T;
+        cta1Href?: T;
+        cta2Label?: T;
+        cta2Href?: T;
+        heroImage?: T;
       };
   layout?:
     | T
@@ -1747,19 +1782,19 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
-        homeHero?: T | HomeHeroSelect<T>;
+        homeHero?: T | HeroSelect<T>;
         threeCards?: T | ThreeCardsBlockSelect<T>;
-        homeSectionHero?: T | HomeSectionHeroBlockSelect<T>;
-        homeSectionLogoCloud?: T | HomeSectionLogoCloudBlockSelect<T>;
-        homeSectionServices?: T | HomeSectionServicesBlockSelect<T>;
-        homeSectionAbout?: T | HomeSectionAboutBlockSelect<T>;
-        homeSectionProjects?: T | HomeSectionProjectsBlockSelect<T>;
-        homeSectionProcess?: T | HomeSectionProcessBlockSelect<T>;
-        homeSectionStats?: T | HomeSectionStatsBlockSelect<T>;
-        homeSectionTestimonials?: T | HomeSectionTestimonialsBlockSelect<T>;
-        homeSectionBlog?: T | HomeSectionBlogBlockSelect<T>;
-        homeSectionCta?: T | HomeSectionCtaBlockSelect<T>;
-        homeSectionContact?: T | HomeSectionContactBlockSelect<T>;
+        homeSectionHero?: T | SectionHeroBlockSelect<T>;
+        homeSectionLogoCloud?: T | SectionLogoCloudBlockSelect<T>;
+        homeSectionServices?: T | SectionServicesBlockSelect<T>;
+        homeSectionAbout?: T | SectionAboutBlockSelect<T>;
+        homeSectionProjects?: T | SectionProjectsBlockSelect<T>;
+        homeSectionProcess?: T | SectionProcessBlockSelect<T>;
+        homeSectionStats?: T | SectionStatsBlockSelect<T>;
+        homeSectionTestimonials?: T | SectionTestimonialsBlockSelect<T>;
+        homeSectionBlog?: T | SectionBlogBlockSelect<T>;
+        homeSectionCta?: T | SectionCtaBlockSelect<T>;
+        homeSectionContact?: T | SectionContactBlockSelect<T>;
         checklistGrid?: T | ChecklistGridBlockSelect<T>;
         faqBlock?: T | FaqBlockBlockSelect<T>;
         pullQuote?: T | PullQuoteBlockSelect<T>;
@@ -1769,6 +1804,7 @@ export interface PagesSelect<T extends boolean = true> {
         arquivoListing?: T | ArquivoListingBlockSelect<T>;
         latestPortfolios?: T | LatestPortfoliosBlockSelect<T>;
         latestPosts?: T | LatestPostsBlockSelect<T>;
+        portfolioListing?: T | PortfolioListingBlockSelect<T>;
       };
   meta?:
     | T
@@ -1870,9 +1906,9 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeHero_select".
+ * via the `definition` "Hero_select".
  */
-export interface HomeHeroSelect<T extends boolean = true> {
+export interface HeroSelect<T extends boolean = true> {
   title?: T;
   'hero-image'?: T;
   id?: T;
@@ -1902,9 +1938,9 @@ export interface ThreeCardsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionHeroBlock_select".
+ * via the `definition` "SectionHeroBlock_select".
  */
-export interface HomeSectionHeroBlockSelect<T extends boolean = true> {
+export interface SectionHeroBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   description?: T;
@@ -1918,16 +1954,15 @@ export interface HomeSectionHeroBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionLogoCloudBlock_select".
+ * via the `definition` "SectionLogoCloudBlock_select".
  */
-export interface HomeSectionLogoCloudBlockSelect<T extends boolean = true> {
+export interface SectionLogoCloudBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   description?: T;
   partners?:
     | T
     | {
-        name?: T;
         glyph?: T;
         id?: T;
       };
@@ -1936,9 +1971,9 @@ export interface HomeSectionLogoCloudBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionServicesBlock_select".
+ * via the `definition` "SectionServicesBlock_select".
  */
-export interface HomeSectionServicesBlockSelect<T extends boolean = true> {
+export interface SectionServicesBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   description?: T;
@@ -1964,9 +1999,9 @@ export interface HomeSectionServicesBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionAboutBlock_select".
+ * via the `definition` "SectionAboutBlock_select".
  */
-export interface HomeSectionAboutBlockSelect<T extends boolean = true> {
+export interface SectionAboutBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   description?: T;
@@ -1985,9 +2020,9 @@ export interface HomeSectionAboutBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionProjectsBlock_select".
+ * via the `definition` "SectionProjectsBlock_select".
  */
-export interface HomeSectionProjectsBlockSelect<T extends boolean = true> {
+export interface SectionProjectsBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   portfolioLabel?: T;
@@ -2011,9 +2046,9 @@ export interface HomeSectionProjectsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionProcessBlock_select".
+ * via the `definition` "SectionProcessBlock_select".
  */
-export interface HomeSectionProcessBlockSelect<T extends boolean = true> {
+export interface SectionProcessBlockSelect<T extends boolean = true> {
   background?: T;
   eyebrow?: T;
   title?: T;
@@ -2031,9 +2066,9 @@ export interface HomeSectionProcessBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionStatsBlock_select".
+ * via the `definition` "SectionStatsBlock_select".
  */
-export interface HomeSectionStatsBlockSelect<T extends boolean = true> {
+export interface SectionStatsBlockSelect<T extends boolean = true> {
   showDecoration?: T;
   stats?:
     | T
@@ -2047,9 +2082,9 @@ export interface HomeSectionStatsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionTestimonialsBlock_select".
+ * via the `definition` "SectionTestimonialsBlock_select".
  */
-export interface HomeSectionTestimonialsBlockSelect<T extends boolean = true> {
+export interface SectionTestimonialsBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   description?: T;
@@ -2070,9 +2105,9 @@ export interface HomeSectionTestimonialsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionBlogBlock_select".
+ * via the `definition` "SectionBlogBlock_select".
  */
-export interface HomeSectionBlogBlockSelect<T extends boolean = true> {
+export interface SectionBlogBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   blogLabel?: T;
@@ -2093,9 +2128,9 @@ export interface HomeSectionBlogBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionCtaBlock_select".
+ * via the `definition` "SectionCtaBlock_select".
  */
-export interface HomeSectionCtaBlockSelect<T extends boolean = true> {
+export interface SectionCtaBlockSelect<T extends boolean = true> {
   variant?: T;
   eyebrow?: T;
   titleMain?: T;
@@ -2114,9 +2149,9 @@ export interface HomeSectionCtaBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HomeSectionContactBlock_select".
+ * via the `definition` "SectionContactBlock_select".
  */
-export interface HomeSectionContactBlockSelect<T extends boolean = true> {
+export interface SectionContactBlockSelect<T extends boolean = true> {
   email?: T;
   emailHref?: T;
   phone?: T;
@@ -2256,6 +2291,18 @@ export interface LatestPostsBlockSelect<T extends boolean = true> {
   title?: T;
   blogLabel?: T;
   blogHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PortfolioListingBlock_select".
+ */
+export interface PortfolioListingBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  showFilters?: T;
+  showViewToggle?: T;
   id?: T;
   blockName?: T;
 }
@@ -2798,7 +2845,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "header".
  */
 export interface Header {
-  id: string;
+  id: number;
   navItems?:
     | {
         link: {
@@ -2807,11 +2854,11 @@ export interface Header {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: string | Page;
+                value: number | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: string | Post;
+                value: number | Post;
               } | null);
           url?: string | null;
           label: string;
@@ -2827,7 +2874,7 @@ export interface Header {
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: string;
+  id: number;
   navItems?:
     | {
         link: {
@@ -2836,11 +2883,11 @@ export interface Footer {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: string | Page;
+                value: number | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: string | Post;
+                value: number | Post;
               } | null);
           url?: string | null;
           label: string;
@@ -2918,22 +2965,22 @@ export interface TaskSchedulePublish {
     doc?:
       | ({
           relationTo: 'pages';
-          value: string | Page;
+          value: number | Page;
         } | null)
       | ({
           relationTo: 'posts';
-          value: string | Post;
+          value: number | Post;
         } | null)
       | ({
           relationTo: 'arquivo';
-          value: string | Arquivo;
+          value: number | Arquivo;
         } | null)
       | ({
           relationTo: 'portfolios';
-          value: string | Portfolio;
+          value: number | Portfolio;
         } | null);
     global?: string | null;
-    user?: (string | null) | User;
+    user?: (number | null) | User;
   };
   output?: unknown;
 }

@@ -7,19 +7,19 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { HomeHero } from '../../blocks/HomeHero/config'
+import { Hero } from '../../blocks/Hero/config'
 import { ThreeCards } from '../../blocks/ThreeCards/config'
-import { HomeSectionHero } from '../../blocks/HomeSectionHero/config'
-import { HomeSectionLogoCloud } from '../../blocks/HomeSectionLogoCloud/config'
-import { HomeSectionServices } from '../../blocks/HomeSectionServices/config'
-import { HomeSectionAbout } from '../../blocks/HomeSectionAbout/config'
-import { HomeSectionProjects } from '../../blocks/HomeSectionProjects/config'
-import { HomeSectionProcess } from '../../blocks/HomeSectionProcess/config'
-import { HomeSectionStats } from '../../blocks/HomeSectionStats/config'
-import { HomeSectionTestimonials } from '../../blocks/HomeSectionTestimonials/config'
-import { HomeSectionBlog } from '../../blocks/HomeSectionBlog/config'
-import { HomeSectionCta } from '../../blocks/HomeSectionCta/config'
-import { HomeSectionContact } from '../../blocks/HomeSectionContact/config'
+import { SectionHero } from '../../blocks/SectionHero/config'
+import { SectionLogoCloud } from '../../blocks/SectionLogoCloud/config'
+import { SectionServices } from '../../blocks/SectionServices/config'
+import { SectionAbout } from '../../blocks/SectionAbout/config'
+import { SectionProjects } from '../../blocks/SectionProjects/config'
+import { SectionProcess } from '../../blocks/SectionProcess/config'
+import { SectionStats } from '../../blocks/SectionStats/config'
+import { SectionTestimonials } from '../../blocks/SectionTestimonials/config'
+import { SectionBlog } from '../../blocks/SectionBlog/config'
+import { SectionCta } from '../../blocks/SectionCta/config'
+import { SectionContact } from '../../blocks/SectionContact/config'
 import { ChecklistGrid } from '../../blocks/ChecklistGrid/config'
 import { FaqBlock } from '../../blocks/FaqBlock/config'
 import { PullQuote } from '../../blocks/PullQuote/config'
@@ -29,6 +29,7 @@ import { BlogListing } from '../../blocks/BlogListing/config'
 import { ArquivoListing } from '../../blocks/ArquivoListing/config'
 import { LatestPortfolios } from '../../blocks/LatestPortfolios/config'
 import { LatestPosts } from '../../blocks/LatestPosts/config'
+import { PortfolioListing } from '../../blocks/PortfolioListing/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -100,19 +101,19 @@ export const Pages: CollectionConfig<'pages'> = {
                 MediaBlock,
                 Archive,
                 FormBlock,
-                HomeHero,
+                Hero,
                 ThreeCards,
-                HomeSectionHero,
-                HomeSectionLogoCloud,
-                HomeSectionServices,
-                HomeSectionAbout,
-                HomeSectionProjects,
-                HomeSectionProcess,
-                HomeSectionStats,
-                HomeSectionTestimonials,
-                HomeSectionBlog,
-                HomeSectionCta,
-                HomeSectionContact,
+                SectionHero,
+                SectionLogoCloud,
+                SectionServices,
+                SectionAbout,
+                SectionProjects,
+                SectionProcess,
+                SectionStats,
+                SectionTestimonials,
+                SectionBlog,
+                SectionCta,
+                SectionContact,
                 ChecklistGrid,
                 FaqBlock,
                 PullQuote,
@@ -122,6 +123,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ArquivoListing,
                 LatestPortfolios,
                 LatestPosts,
+                PortfolioListing,
               ],
               required: true,
               admin: {

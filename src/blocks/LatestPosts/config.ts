@@ -4,6 +4,8 @@ export const LatestPosts: Block = {
   slug: 'latestPosts',
   interfaceName: 'LatestPostsBlock',
   labels: { singular: 'Últimos Posts', plural: 'Últimos Posts' },
+  imageURL: '/images/blocks/ultimosPosts.png',
+  imageAltText: 'Últimos Posts',
   fields: [
     {
       name: 'eyebrow',

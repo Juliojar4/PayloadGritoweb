@@ -4,7 +4,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
 import type { ProjectGridAsymmetricBlock, Portfolio, Media } from '@/payload-types'
-import { SectionTitle, ProjectGrid } from '@/home/sections'
+import { SectionTitle, ProjectGrid } from '@/components/sections'
 import { Button } from '@/home/primitives'
 import { parseTitle } from '@/utilities/parseTitle'
 import { ProjectCard } from '@/home/cards'

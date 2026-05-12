@@ -4,6 +4,8 @@ export const ArquivoListing: Block = {
   slug: 'arquivoListing',
   interfaceName: 'ArquivoListingBlock',
   labels: { singular: 'Listagem de Arquivo', plural: 'Listagens de Arquivo' },
+  imageURL: '/images/blocks/listagemDePost.png',
+  imageAltText: 'Listagem de Arquivo',
   fields: [
     {
       name: 'eyebrow',

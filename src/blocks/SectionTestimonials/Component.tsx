@@ -2,7 +2,7 @@ import React from 'react'
 import type { SectionTestimonialsBlock } from '@/payload-types'
 import { SectionTitle, TestimonialsSection } from '@/components/sections'
 import { parseTitle } from '@/utilities/parseTitle'
-import { TestimonialCard } from '@/home/cards'
+import { TestimonialsCarousel } from './TestimonialsCarousel.client'
 
 export const SectionTestimonialsComponent: React.FC<SectionTestimonialsBlock> = ({
   eyebrow,
@@ -44,16 +44,16 @@ export const SectionTestimonialsComponent: React.FC<SectionTestimonialsBlock> = 
         </>
       }
     >
-      {(testimonials ?? []).map((testimonial) => (
-        <TestimonialCard
-          key={testimonial.id}
-          quote={testimonial.quote}
-          author={testimonial.author}
-          role={testimonial.role ?? undefined}
-          avatarVariant={testimonial.avatarVariant as 'blue' | 'orange'}
-          surface={testimonial.surface as 'paper' | 'card'}
-        />
-      ))}
+      <TestimonialsCarousel
+        items={(testimonials ?? []).map((t) => ({
+          id: t.id,
+          quote: t.quote,
+          author: t.author,
+          role: t.role,
+          avatarVariant: t.avatarVariant as 'blue' | 'orange',
+          surface: t.surface as 'paper' | 'card',
+        }))}
+      />
     </TestimonialsSection>
   )
 }

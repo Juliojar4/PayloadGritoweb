@@ -25,19 +25,42 @@ function AccordionItem({
         <span
           aria-hidden="true"
           className={[
-            'shrink-0 inline-flex items-center justify-center h-7 w-7 rounded-full text-base font-normal leading-none',
-            'transition-[background-color,color,transform] duration-150 motion-reduce:transition-none',
-            open ? 'bg-orange text-white rotate-45' : 'bg-blue/8 text-blue',
+            'shrink-0 inline-flex items-center justify-center h-7 w-7 rounded-full',
+            'transition-[background-color,color] duration-200 motion-reduce:transition-none',
+            open ? 'bg-orange text-white' : 'bg-blue/8 text-blue',
           ].join(' ')}
         >
-          +
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={[
+              'transition-transform duration-300 motion-reduce:transition-none',
+              open ? 'rotate-180' : 'rotate-0',
+            ].join(' ')}
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </span>
       </button>
-      {open && (
-        <div className="pb-7 pr-10">
-          <p className="m-0 text-base text-ink-soft leading-relaxed max-w-3xl">{answer}</p>
+      <div
+        className={[
+          'grid transition-[grid-template-rows] duration-300 ease-in-out motion-reduce:transition-none',
+          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+        ].join(' ')}
+      >
+        <div className="overflow-hidden">
+          <div className="pb-7 pr-10">
+            <p className="m-0 text-base text-ink-soft leading-relaxed max-w-3xl">{answer}</p>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }
